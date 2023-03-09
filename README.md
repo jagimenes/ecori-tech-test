@@ -1,4 +1,4 @@
-## Tech test to integrate the Ecori Team 🏡
+## Tech test to integrate the Ecori Team ☀
 
 <br>
 
