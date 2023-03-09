@@ -1,3 +1,5 @@
+[![en](https://img.shields.io/badge/lang-en-red.svg)](https://github.com/jagimenes/ecori-tech-test/blob/main/README.md)
+
 ## Teste técnico para integrar o time da Ecori ☀
 
 <br>
