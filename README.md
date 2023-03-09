@@ -1,3 +1,5 @@
+[![pt-br](https://img.shields.io/badge/lang-pt--br-green.svg)](https://github.com/jagimenes/ecori-tech-test/blob/main/README.pt-br.md)
+
 ## Tech test to integrate the Ecori Team ☀
 
 <br>
