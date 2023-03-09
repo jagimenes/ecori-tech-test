@@ -13,7 +13,7 @@
 🔴 A page of **character details**, that shows all info returned from the backend by clicking on a character on the list created before;<br>
 
 ## Technologies and tools you have to use:
-☑️ .Net 6 <br>
+☑️ [.Net 6](https://dotnet.microsoft.com/pt-br/) <br>
 ☑️ [Angular](https://angular.io/) <br>
 ☑️ Be free to use any other tools/tecs if you need <br>
 
