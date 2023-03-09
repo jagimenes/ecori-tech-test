@@ -1,0 +1,12 @@
+C:\Users\lucas\work\ecori-tech-test\MarvelComicsEcori\MarvelComicsEcori.Domain\bin\Debug\net6.0\MarvelComicsEcori.Domain.deps.json
+C:\Users\lucas\work\ecori-tech-test\MarvelComicsEcori\MarvelComicsEcori.Domain\bin\Debug\net6.0\MarvelComicsEcori.Domain.dll
+C:\Users\lucas\work\ecori-tech-test\MarvelComicsEcori\MarvelComicsEcori.Domain\bin\Debug\net6.0\MarvelComicsEcori.Domain.pdb
+C:\Users\lucas\work\ecori-tech-test\MarvelComicsEcori\MarvelComicsEcori.Domain\obj\Debug\net6.0\MarvelComicsEcori.Domain.csproj.AssemblyReference.cache
+C:\Users\lucas\work\ecori-tech-test\MarvelComicsEcori\MarvelComicsEcori.Domain\obj\Debug\net6.0\MarvelComicsEcori.Domain.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\lucas\work\ecori-tech-test\MarvelComicsEcori\MarvelComicsEcori.Domain\obj\Debug\net6.0\MarvelComicsEcori.Domain.AssemblyInfoInputs.cache
+C:\Users\lucas\work\ecori-tech-test\MarvelComicsEcori\MarvelComicsEcori.Domain\obj\Debug\net6.0\MarvelComicsEcori.Domain.AssemblyInfo.cs
+C:\Users\lucas\work\ecori-tech-test\MarvelComicsEcori\MarvelComicsEcori.Domain\obj\Debug\net6.0\MarvelComicsEcori.Domain.csproj.CoreCompileInputs.cache
+C:\Users\lucas\work\ecori-tech-test\MarvelComicsEcori\MarvelComicsEcori.Domain\obj\Debug\net6.0\MarvelComicsEcori.Domain.dll
+C:\Users\lucas\work\ecori-tech-test\MarvelComicsEcori\MarvelComicsEcori.Domain\obj\Debug\net6.0\refint\MarvelComicsEcori.Domain.dll
+C:\Users\lucas\work\ecori-tech-test\MarvelComicsEcori\MarvelComicsEcori.Domain\obj\Debug\net6.0\MarvelComicsEcori.Domain.pdb
+C:\Users\lucas\work\ecori-tech-test\MarvelComicsEcori\MarvelComicsEcori.Domain\obj\Debug\net6.0\ref\MarvelComicsEcori.Domain.dll
