@@ -6,16 +6,16 @@ namespace MarvelComicsEcori.Domain.Repositories;
 public interface ICharacterRepository
 {
     Task<List<CharacterEntity>> GetAll(
-        string? name,
-        string? nameStartsWith,
-        DateTime? modifiedSince,
-        int? comics,
-        int? series,
-        int? events,
-        int? stories,
-        ModifiedEnum? orderBy,
-        int? limit,
-        int? offset
+        string? name = null,
+        string? nameStartsWith = null,
+        DateTime? modifiedSince = null,
+        int? comics = null,
+        int? series = null,
+        int? events = null,
+        int? stories = null,
+        ModifiedEnum? orderBy = null,
+        int? limit = null,
+        int? offset = null
     );
 
     Task<CharacterEntity> GetById(int id);

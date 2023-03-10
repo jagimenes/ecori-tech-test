@@ -13,8 +13,9 @@ public class GetAllCharactersQueryHandle : IRequestHandler<GetAllCharactersQuery
         _characterRepository = characterRepository;
     }
 
-    public Task<List<CharacterEntity>> Handle(GetAllCharactersQuery request, CancellationToken cancellationToken)
+    public async Task<List<CharacterEntity>> Handle(GetAllCharactersQuery request, CancellationToken cancellationToken)
     {
+        var opa = await _characterRepository.GetAll();
         throw new NotImplementedException();
     }
 }

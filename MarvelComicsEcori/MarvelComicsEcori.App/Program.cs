@@ -36,6 +36,7 @@ void ConfigureApp(WebApplication app)
 
 void ConfigureService(IServiceCollection services)
 {
+    services.AddHttpClient();
     services.AddScoped<ICharacterRepository, CharacterRepository>();
     services.AddMediatR(typeof(GetAllCharactersQuery));
     services.AddSwaggerGen(c =>
