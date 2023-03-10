@@ -1,8 +1,13 @@
 {
   "version": 2,
-  "dgSpecHash": "aqL0cZhXuebzqi2PCAXbFjpWDtBDxSPp1fuFe/1JgySuCRsuz0wQXqTQeXtCMR/3p3VsutMACm2FOV1f5KI52A==",
+  "dgSpecHash": "ske6+Xg9Vo5/eUxPFnbCGjf3bQL9b69azSpt0oRppWqqY+5XeHJRm1crS4Gowq3pTLe+OOob/VQ9hzOUR2+cNA==",
   "success": true,
   "projectFilePath": "C:\\Users\\lucas\\work\\ecori-tech-test\\MarvelComicsEcori\\MarvelComicsEcori.Domain\\MarvelComicsEcori.Domain.csproj",
-  "expectedPackageFiles": [],
+  "expectedPackageFiles": [
+    "C:\\Users\\lucas\\.nuget\\packages\\mediatr\\11.0.0\\mediatr.11.0.0.nupkg.sha512",
+    "C:\\Users\\lucas\\.nuget\\packages\\mediatr.contracts\\1.0.1\\mediatr.contracts.1.0.1.nupkg.sha512",
+    "C:\\Users\\lucas\\.nuget\\packages\\mediatr.extensions.microsoft.dependencyinjection\\11.1.0\\mediatr.extensions.microsoft.dependencyinjection.11.1.0.nupkg.sha512",
+    "C:\\Users\\lucas\\.nuget\\packages\\microsoft.extensions.dependencyinjection.abstractions\\7.0.0\\microsoft.extensions.dependencyinjection.abstractions.7.0.0.nupkg.sha512"
+  ],
   "logs": []
 }

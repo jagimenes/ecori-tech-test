@@ -1,4 +1,7 @@
-using Microsoft.AspNetCore;
+using MarvelComicsEcori.Domain.Queries;
+using MarvelComicsEcori.Domain.Repositories;
+using MarvelComicsEcori.Infra.Repositories;
+using MediatR;
 using Microsoft.OpenApi.Models;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -33,6 +36,8 @@ void ConfigureApp(WebApplication app)
 
 void ConfigureService(IServiceCollection services)
 {
+    services.AddScoped<ICharacterRepository, CharacterRepository>();
+    services.AddMediatR(typeof(GetAllCharactersQuery));
     services.AddSwaggerGen(c =>
     {
         c.SwaggerDoc("v1", new OpenApiInfo { Title = "My API", Version = "v1" });
