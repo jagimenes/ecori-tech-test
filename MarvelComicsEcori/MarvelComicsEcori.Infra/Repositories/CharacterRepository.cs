@@ -20,23 +20,26 @@ public class CharacterRepository : ICharacterRepository
 
     public async Task<CharacterReturnDto> GetAll(string? name = null, string? nameStartsWith = null, DateTime? modifiedSince = null, int? comics = null, int? series = null, int? events = null, int? stories = null, ModifiedEnum? orderBy = null, int? limit = null, int? offset = null)
     {
-        HttpResponseMessage response = await _httpClient.GetAsync(MountUrl());
+        HttpResponseMessage response = await _httpClient.GetAsync(MountUrl("characters"));
         string json = await response.Content.ReadAsStringAsync();
         var result = JsonConvert.DeserializeObject<CharacterReturnDto>(json);
         return result;
     }
 
-    public Task<CharacterReturnDto> GetById(int id)
+    public async Task<CharacterReturnDto> GetById(int id)
     {
-        throw new NotImplementedException();
+        HttpResponseMessage response = await _httpClient.GetAsync(MountUrl($"characters/{id}"));
+        string json = await response.Content.ReadAsStringAsync();
+        var result = JsonConvert.DeserializeObject<CharacterReturnDto>(json);
+        return result;
     }
 
-    private string MountUrl()
+    private string MountUrl(string route)
     {
         string apiUrl = _configuration.GetValue<string>("MarvelApiUrl");
         string ts = _configuration.GetValue<string>("MarvelApiTs");
         string apiKey = _configuration.GetValue<string>("MarvelApiKey");
         string hash = _configuration.GetValue<string>("MarvelApiHash");
-        return $"http://gateway.marvel.com/v1/public/characters?ts=1&apikey=1a846bed8c30d9027d631725b081bac7&hash=e140159f8961d5c2e35f628ebceb5775";
+        return $"http://gateway.marvel.com/v1/public/{route}?ts=1&apikey=1a846bed8c30d9027d631725b081bac7&hash=e140159f8961d5c2e35f628ebceb5775";
     }
 }

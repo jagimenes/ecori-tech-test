@@ -1,5 +1,14 @@
-﻿namespace MarvelComicsEcori.Domain.Queries;
+﻿using MarvelComicsEcori.Domain.Serializers;
+using MediatR;
 
-internal class GetByIdCharacterQuery
+namespace MarvelComicsEcori.Domain.Queries;
+
+public class GetByIdCharacterQuery : IRequest<CharacterReturnDto>
 {
+    public int Id { get; set; }
+
+    public GetByIdCharacterQuery(int id)
+    {
+        Id = id;
+    }
 }
