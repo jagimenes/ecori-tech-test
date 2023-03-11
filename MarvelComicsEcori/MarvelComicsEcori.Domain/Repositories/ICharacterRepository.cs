@@ -14,8 +14,8 @@ public interface ICharacterRepository
         int? events = null,
         int? stories = null,
         ModifiedEnum? orderBy = null,
-        int? limit = null,
-        int? offset = null
+        int? Take = null,
+        int? Skip = null
     );
 
     Task<CharacterReturnDto> GetById(int id);

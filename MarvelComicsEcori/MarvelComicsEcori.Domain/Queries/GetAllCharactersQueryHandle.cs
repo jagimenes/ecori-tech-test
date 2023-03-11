@@ -15,7 +15,18 @@ public class GetAllCharactersQueryHandle : IRequestHandler<GetAllCharactersQuery
 
     public async Task<CharacterReturnDto> Handle(GetAllCharactersQuery request, CancellationToken cancellationToken)
     {
-        var result = await _characterRepository.GetAll();
+        var result = await _characterRepository.GetAll(
+            request.Name,
+            request.NameStartsWith,
+            request.ModifiedSince,
+            request.Comics,
+            request.Series,
+            request.Events,
+            request.Stories,
+            request.OrderBy,
+            request.Take,
+            request.Skip
+        );
         return result;
     }
 }

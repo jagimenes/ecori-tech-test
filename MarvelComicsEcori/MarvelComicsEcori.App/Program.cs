@@ -3,6 +3,7 @@ using MarvelComicsEcori.Domain.Repositories;
 using MarvelComicsEcori.Infra.Repositories;
 using MediatR;
 using Microsoft.OpenApi.Models;
+using System.Text.Json.Serialization;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -44,6 +45,6 @@ void ConfigureService(IServiceCollection services)
     {
         c.SwaggerDoc("v1", new OpenApiInfo { Title = "My API", Version = "v1" });
     });
-    services.AddControllersWithViews();
+    services.AddControllersWithViews().AddJsonOptions(options => { options.JsonSerializerOptions.Converters.Add(new JsonStringEnumConverter()); }); ;
     services.AddEndpointsApiExplorer();
 }

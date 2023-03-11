@@ -1,7 +1,7 @@
-﻿using MarvelComicsEcori.Domain.Entities;
-using MarvelComicsEcori.Domain.Enum;
+﻿using MarvelComicsEcori.Domain.Enum;
 using MarvelComicsEcori.Domain.Repositories;
 using MarvelComicsEcori.Domain.Serializers;
+using Microsoft.AspNetCore.WebUtilities;
 using Microsoft.Extensions.Configuration;
 using Newtonsoft.Json;
 
@@ -18,11 +18,37 @@ public class CharacterRepository : ICharacterRepository
         _httpClient = httpClient;
     }
 
-    public async Task<CharacterReturnDto> GetAll(string? name = null, string? nameStartsWith = null, DateTime? modifiedSince = null, int? comics = null, int? series = null, int? events = null, int? stories = null, ModifiedEnum? orderBy = null, int? limit = null, int? offset = null)
+    public async Task<CharacterReturnDto> GetAll(
+        string? name = null,
+        string? nameStartsWith = null,
+        DateTime? modifiedSince = null,
+        int? comics = null,
+        int? series = null,
+        int? events = null,
+        int? stories = null,
+        ModifiedEnum? orderBy = null,
+        int? Take = null,
+        int? Skip = null)
     {
-        HttpResponseMessage response = await _httpClient.GetAsync(MountUrl("characters"));
+        var orderByValue = GetString.GetValueEnum(orderBy.ToString());
+        var query = new Dictionary<string, string>()
+        {
+            ["name"] = name,
+            ["nameStartsWith"] = nameStartsWith,
+            ["modifiedSince"] = modifiedSince?.ToString("yyyy-MM-ddTHH:mm:sszzz"),
+            ["comics"] = comics?.ToString() ?? null,
+            ["series"] = series?.ToString() ?? null,
+            ["events"] = events?.ToString() ?? null,
+            ["stories"] = stories?.ToString() ?? null,
+            ["orderBy"] = orderByValue,
+            ["limit"] = Take?.ToString() ?? null,
+            ["offset"] = (Skip * Take)?.ToString() ?? null,
+        };
+        var uri = QueryHelpers.AddQueryString(MountUrl("characters"), query);
+        HttpResponseMessage response = await _httpClient.GetAsync(uri);
         string json = await response.Content.ReadAsStringAsync();
         var result = JsonConvert.DeserializeObject<CharacterReturnDto>(json);
+        result.Data.Skip = Skip ?? 0;
         return result;
     }
 
@@ -36,10 +62,6 @@ public class CharacterRepository : ICharacterRepository
 
     private string MountUrl(string route)
     {
-        string apiUrl = _configuration.GetValue<string>("MarvelApiUrl");
-        string ts = _configuration.GetValue<string>("MarvelApiTs");
-        string apiKey = _configuration.GetValue<string>("MarvelApiKey");
-        string hash = _configuration.GetValue<string>("MarvelApiHash");
         return $"http://gateway.marvel.com/v1/public/{route}?ts=1&apikey=1a846bed8c30d9027d631725b081bac7&hash=e140159f8961d5c2e35f628ebceb5775";
     }
 }

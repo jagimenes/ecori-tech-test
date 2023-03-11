@@ -9,11 +9,10 @@ public class DataDto
         Results = new List<ResultsDto>();
     }
 
-    [JsonProperty("offset")]
-    public int Offset { get; set; }
+    public int Skip { get; set; }
 
     [JsonProperty("limit")]
-    public int Limit { get; set; }
+    public int Take { get; set; }
 
     [JsonProperty("total")]
     public int Total { get; set; }

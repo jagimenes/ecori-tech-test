@@ -34,7 +34,6 @@ public class ResultsDto
     [JsonProperty("comics")]
     public ComicVo Comics { get; private set; }
 
-    [JsonProperty("stories")]
     public StoryVo Storys { get; private set; }
 
     [JsonProperty("series")]
