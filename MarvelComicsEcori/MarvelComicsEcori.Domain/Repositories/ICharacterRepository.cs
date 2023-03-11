@@ -1,11 +1,11 @@
-﻿using MarvelComicsEcori.Domain.Entities;
-using MarvelComicsEcori.Domain.Enum;
+﻿using MarvelComicsEcori.Domain.Enum;
+using MarvelComicsEcori.Domain.Serializers;
 
 namespace MarvelComicsEcori.Domain.Repositories;
 
 public interface ICharacterRepository
 {
-    Task<List<CharacterEntity>> GetAll(
+    Task<CharacterReturnDto> GetAll(
         string? name = null,
         string? nameStartsWith = null,
         DateTime? modifiedSince = null,
@@ -18,5 +18,5 @@ public interface ICharacterRepository
         int? offset = null
     );
 
-    Task<CharacterEntity> GetById(int id);
+    Task<CharacterReturnDto> GetById(int id);
 }

@@ -1,10 +1,10 @@
-﻿using MarvelComicsEcori.Domain.Entities;
-using MarvelComicsEcori.Domain.Repositories;
+﻿using MarvelComicsEcori.Domain.Repositories;
+using MarvelComicsEcori.Domain.Serializers;
 using MediatR;
 
 namespace MarvelComicsEcori.Domain.Queries;
 
-public class GetAllCharactersQueryHandle : IRequestHandler<GetAllCharactersQuery, List<CharacterEntity>>
+public class GetAllCharactersQueryHandle : IRequestHandler<GetAllCharactersQuery, CharacterReturnDto>
 {
     private readonly ICharacterRepository _characterRepository;
 
@@ -13,9 +13,9 @@ public class GetAllCharactersQueryHandle : IRequestHandler<GetAllCharactersQuery
         _characterRepository = characterRepository;
     }
 
-    public async Task<List<CharacterEntity>> Handle(GetAllCharactersQuery request, CancellationToken cancellationToken)
+    public async Task<CharacterReturnDto> Handle(GetAllCharactersQuery request, CancellationToken cancellationToken)
     {
-        var opa = await _characterRepository.GetAll();
-        throw new NotImplementedException();
+        var result = await _characterRepository.GetAll();
+        return result;
     }
 }

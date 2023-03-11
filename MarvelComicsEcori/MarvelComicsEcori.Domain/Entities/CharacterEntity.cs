@@ -4,6 +4,14 @@ namespace MarvelComicsEcori.Domain.Entities;
 
 public class CharacterEntity
 {
+    public CharacterEntity()
+    {
+        Urls = new List<UrlVo>();
+        Comics = new List<ComicVo>();
+        Storys = new List<StoryVo>();
+        Series = new List<SeriesSummaryVo>();
+    }
+
     public int Id { get; private set; }
     public string Name { get; private set; }
     public string Description { get; private set; }

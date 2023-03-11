@@ -2,6 +2,12 @@
 
 public class StorySummaryVo
 {
-    public string ResourceURL { get; private set; }
+    public StorySummaryVo(string resourceURI, string name)
+    {
+        ResourceURI = resourceURI;
+        Name = name;
+    }
+
+    public string ResourceURI { get; private set; }
     public string Name { get; private set; }
 }

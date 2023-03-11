@@ -1,10 +1,10 @@
-﻿using MarvelComicsEcori.Domain.Entities;
-using MarvelComicsEcori.Domain.Enum;
+﻿using MarvelComicsEcori.Domain.Enum;
+using MarvelComicsEcori.Domain.Serializers;
 using MediatR;
 
 namespace MarvelComicsEcori.Domain.Queries;
 
-public class GetAllCharactersQuery : IRequest<List<CharacterEntity>>
+public class GetAllCharactersQuery : IRequest<CharacterReturnDto>
 {
     public string? Name { get; private set; }
     public string? NameStartsWith { get; private set; }

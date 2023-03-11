@@ -12,6 +12,7 @@ ConfigureApp(builder.Build());
 
 void ConfigureApp(WebApplication app)
 {
+    app.UseCors(builder => builder.AllowAnyOrigin().AllowAnyMethod().AllowAnyHeader());
     if (!app.Environment.IsDevelopment())
     {
         app.UseHsts();

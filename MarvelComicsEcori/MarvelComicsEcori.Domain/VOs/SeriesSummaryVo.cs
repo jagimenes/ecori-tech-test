@@ -2,7 +2,13 @@
 {
     public class SeriesSummaryVo
     {
-        public string ResourceURL { get; private set; }
+        public SeriesSummaryVo(string resourceURI, string name)
+        {
+            ResourceURI = resourceURI;
+            Name = name;
+        }
+
+        public string ResourceURI { get; private set; }
         public string Name { get; private set; }
     }
 }

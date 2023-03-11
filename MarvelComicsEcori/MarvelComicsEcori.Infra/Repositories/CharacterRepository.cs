@@ -1,6 +1,7 @@
 ﻿using MarvelComicsEcori.Domain.Entities;
 using MarvelComicsEcori.Domain.Enum;
 using MarvelComicsEcori.Domain.Repositories;
+using MarvelComicsEcori.Domain.Serializers;
 using Microsoft.Extensions.Configuration;
 using Newtonsoft.Json;
 
@@ -17,16 +18,15 @@ public class CharacterRepository : ICharacterRepository
         _httpClient = httpClient;
     }
 
-    public async Task<List<CharacterEntity>> GetAll(string? name = null, string? nameStartsWith = null, DateTime? modifiedSince = null, int? comics = null, int? series = null, int? events = null, int? stories = null, ModifiedEnum? orderBy = null, int? limit = null, int? offset = null)
+    public async Task<CharacterReturnDto> GetAll(string? name = null, string? nameStartsWith = null, DateTime? modifiedSince = null, int? comics = null, int? series = null, int? events = null, int? stories = null, ModifiedEnum? orderBy = null, int? limit = null, int? offset = null)
     {
         HttpResponseMessage response = await _httpClient.GetAsync(MountUrl());
         string json = await response.Content.ReadAsStringAsync();
-        ///var result = JsonConvert.DeserializeObject<T>(json); ///Create DTO para serializar
-        var i = 0;
-        throw new NotImplementedException();
+        var result = JsonConvert.DeserializeObject<CharacterReturnDto>(json);
+        return result;
     }
 
-    public Task<CharacterEntity> GetById(int id)
+    public Task<CharacterReturnDto> GetById(int id)
     {
         throw new NotImplementedException();
     }
