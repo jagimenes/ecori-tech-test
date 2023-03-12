@@ -1,10 +1,10 @@
 namespace MarvelComicsEcori.Test
 {
     [TestClass]
-    public class UnitTest1
+    public class CharactersTest
     {
         [TestMethod]
-        public void TestMethod1()
+        public void Get_AllCharacters_Query_Handler()
         {
         }
     }
