@@ -3,9 +3,9 @@ using Newtonsoft.Json;
 
 namespace MarvelComicsEcori.Domain.DTOs;
 
-public class ResultsDto
+public class ResultsCharacterDto
 {
-    public ResultsDto()
+    public ResultsCharacterDto()
     {
         Urls = new List<UrlVo>();
     }

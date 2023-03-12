@@ -1,9 +1,8 @@
-﻿using MarvelComicsEcori.Domain.DTOs;
-using Newtonsoft.Json;
+﻿using Newtonsoft.Json;
 
-namespace MarvelComicsEcori.Domain.Serializers;
+namespace MarvelComicsEcori.Domain.DTOs;
 
-public class CharacterReturnDto
+public class ComicsReturnDto
 {
     [JsonProperty("code")]
     public int Code { get; set; }

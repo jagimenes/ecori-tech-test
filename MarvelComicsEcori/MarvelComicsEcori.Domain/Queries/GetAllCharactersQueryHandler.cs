@@ -4,11 +4,11 @@ using MediatR;
 
 namespace MarvelComicsEcori.Domain.Queries;
 
-public class GetAllCharactersQueryHandle : IRequestHandler<GetAllCharactersQuery, CharacterReturnDto>
+public class GetAllCharactersQueryHandler : IRequestHandler<GetAllCharactersQuery, CharacterReturnDto>
 {
     private readonly ICharacterRepository _characterRepository;
 
-    public GetAllCharactersQueryHandle(ICharacterRepository characterRepository)
+    public GetAllCharactersQueryHandler(ICharacterRepository characterRepository)
     {
         _characterRepository = characterRepository;
     }

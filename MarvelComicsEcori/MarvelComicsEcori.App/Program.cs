@@ -40,6 +40,7 @@ void ConfigureService(IServiceCollection services)
 {
     services.AddHttpClient();
     services.AddScoped<ICharacterRepository, CharacterRepository>();
+    services.AddScoped<IComicRepository, ComicRepository>();
     services.AddMediatR(typeof(GetAllCharactersQuery));
     services.AddSwaggerGen(c =>
     {

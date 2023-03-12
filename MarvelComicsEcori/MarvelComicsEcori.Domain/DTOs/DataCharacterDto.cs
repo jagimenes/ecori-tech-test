@@ -2,11 +2,11 @@
 
 namespace MarvelComicsEcori.Domain.DTOs;
 
-public class DataDto
+public class DataCharacterDto
 {
-    public DataDto()
+    public DataCharacterDto()
     {
-        Results = new List<ResultsDto>();
+        Results = new List<ResultsCharacterDto>();
     }
 
     public int Skip { get; set; }
@@ -21,5 +21,5 @@ public class DataDto
     public int Count { get; set; }
 
     [JsonProperty("results")]
-    public List<ResultsDto> Results { get; set; }
+    public List<ResultsCharacterDto> Results { get; set; }
 }
