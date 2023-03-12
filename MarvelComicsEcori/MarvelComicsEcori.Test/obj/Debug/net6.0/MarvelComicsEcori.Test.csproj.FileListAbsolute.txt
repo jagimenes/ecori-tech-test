@@ -10,7 +10,11 @@ C:\Users\lucas\work\ecori-tech-test\MarvelComicsEcori\MarvelComicsEcori.Test\bin
 C:\Users\lucas\work\ecori-tech-test\MarvelComicsEcori\MarvelComicsEcori.Test\bin\Debug\net6.0\MarvelComicsEcori.Test.runtimeconfig.json
 C:\Users\lucas\work\ecori-tech-test\MarvelComicsEcori\MarvelComicsEcori.Test\bin\Debug\net6.0\MarvelComicsEcori.Test.dll
 C:\Users\lucas\work\ecori-tech-test\MarvelComicsEcori\MarvelComicsEcori.Test\bin\Debug\net6.0\MarvelComicsEcori.Test.pdb
+C:\Users\lucas\work\ecori-tech-test\MarvelComicsEcori\MarvelComicsEcori.Test\bin\Debug\net6.0\MediatR.dll
+C:\Users\lucas\work\ecori-tech-test\MarvelComicsEcori\MarvelComicsEcori.Test\bin\Debug\net6.0\MediatR.Contracts.dll
+C:\Users\lucas\work\ecori-tech-test\MarvelComicsEcori\MarvelComicsEcori.Test\bin\Debug\net6.0\MediatR.Extensions.Microsoft.DependencyInjection.dll
 C:\Users\lucas\work\ecori-tech-test\MarvelComicsEcori\MarvelComicsEcori.Test\bin\Debug\net6.0\Microsoft.VisualStudio.CodeCoverage.Shim.dll
+C:\Users\lucas\work\ecori-tech-test\MarvelComicsEcori\MarvelComicsEcori.Test\bin\Debug\net6.0\Microsoft.Extensions.DependencyInjection.Abstractions.dll
 C:\Users\lucas\work\ecori-tech-test\MarvelComicsEcori\MarvelComicsEcori.Test\bin\Debug\net6.0\Microsoft.TestPlatform.CoreUtilities.dll
 C:\Users\lucas\work\ecori-tech-test\MarvelComicsEcori\MarvelComicsEcori.Test\bin\Debug\net6.0\Microsoft.VisualStudio.TestPlatform.ObjectModel.dll
 C:\Users\lucas\work\ecori-tech-test\MarvelComicsEcori\MarvelComicsEcori.Test\bin\Debug\net6.0\Microsoft.TestPlatform.CommunicationUtilities.dll
@@ -99,7 +103,3 @@ C:\Users\lucas\work\ecori-tech-test\MarvelComicsEcori\MarvelComicsEcori.Test\obj
 C:\Users\lucas\work\ecori-tech-test\MarvelComicsEcori\MarvelComicsEcori.Test\obj\Debug\net6.0\MarvelComicsEcori.Test.pdb
 C:\Users\lucas\work\ecori-tech-test\MarvelComicsEcori\MarvelComicsEcori.Test\obj\Debug\net6.0\MarvelComicsEcori.Test.genruntimeconfig.cache
 C:\Users\lucas\work\ecori-tech-test\MarvelComicsEcori\MarvelComicsEcori.Test\obj\Debug\net6.0\ref\MarvelComicsEcori.Test.dll
-C:\Users\lucas\work\ecori-tech-test\MarvelComicsEcori\MarvelComicsEcori.Test\bin\Debug\net6.0\MediatR.dll
-C:\Users\lucas\work\ecori-tech-test\MarvelComicsEcori\MarvelComicsEcori.Test\bin\Debug\net6.0\MediatR.Contracts.dll
-C:\Users\lucas\work\ecori-tech-test\MarvelComicsEcori\MarvelComicsEcori.Test\bin\Debug\net6.0\MediatR.Extensions.Microsoft.DependencyInjection.dll
-C:\Users\lucas\work\ecori-tech-test\MarvelComicsEcori\MarvelComicsEcori.Test\bin\Debug\net6.0\Microsoft.Extensions.DependencyInjection.Abstractions.dll
