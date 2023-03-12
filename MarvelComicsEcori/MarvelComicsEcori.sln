@@ -9,7 +9,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MarvelComicsEcori.Test", "M
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MarvelComicsEcori.App", "MarvelComicsEcori.App\MarvelComicsEcori.App.csproj", "{DA00E0F2-9985-4328-BD99-B1E61EFEC810}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MarvelComicsEcori.Infra", "MarvelComicsEcori.Infra\MarvelComicsEcori.Infra.csproj", "{A12F15B2-B158-4C51-9BE7-C1F3B309C9B3}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MarvelComicsEcori.Infra", "MarvelComicsEcori.Infra\MarvelComicsEcori.Infra.csproj", "{A12F15B2-B158-4C51-9BE7-C1F3B309C9B3}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
