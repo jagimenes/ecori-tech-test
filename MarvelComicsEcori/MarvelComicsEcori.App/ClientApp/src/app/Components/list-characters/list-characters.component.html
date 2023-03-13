@@ -1,0 +1,113 @@
+<div>
+  <h1>Characters:</h1>
+
+  <div id="myModal" class="modal">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="d-flex justify-content-center">
+            <div *ngIf="!detailsCharacter[0]" class="spinner-border" role="status">
+              <span class="visually-hidden">Loading...</span>
+            </div>
+        </div>
+        <div *ngIf="!!detailsCharacter[0]">
+          <div class="modal-header">
+            <h2 class="modal-title">{{detailsCharacter[0]?.name}}</h2>
+            <button (click)="closeModal()" type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+          </div>
+          <div class="modal-body">
+            <img src="{{detailsCharacter[0]?.thunbnail?.path}}.{{detailsCharacter[0]?.thunbnail?.extension}}" class="card-img" style="height: 300px; object-fit: cover;">
+            <h4 class="mt-3">Descrição:</h4>
+            <p>{{detailsCharacter[0]?.description ? detailsCharacter[0]?.description : "No Description :("}}</p>
+            <h4 class="mt-3">Comics:</h4>
+            <ul>
+              <li *ngFor="let comic of detailsCharacter[0]?.comics?.items">{{comic.name}}</li>
+            </ul>
+            <h4 class="mt-3">Series:</h4>
+            <ul>
+              <li *ngFor="let serie of detailsCharacter[0]?.series?.items">{{serie.name}}</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<app-spinner></app-spinner>
+<div class="row">
+  <div class="col-md-3">
+    <div class="form-group">
+      <label for="input1">Nome Especifico</label>
+      <input (input)="handleChange($event)" placeholder="nome inteiro do personagem" type="text" class="form-control" id="name">
+    </div>
+  </div>
+  <div class="col-md-3">
+    <div class="form-group">
+      <label for="input2">Procurar pelo inicio</label>
+      <input (input)="handleChange($event)" placeholder="nome ou letra inicial" type="text" class="form-control" id="nameStartsWith">
+    </div>
+  </div>
+  <div class="col-md-3">
+    <div class="form-group">
+      <label for="input3">Ultima Modificação</label>
+      <input (input)="handleChange($event)" type="date" class="form-control" id="modifiedSince">
+    </div>
+  </div>
+  <div class="col-md-3">
+    <div class="form-group">
+      <label for="input4">Ordenar</label>
+      <select (input)="handleChange($event)" class="form-select" id="OrderBy">
+        <option value="Name">A-Z Nome</option>
+        <option value="_Name">Z-A Nome</option>
+        <option value="Modified">Ultimas modificações</option>
+        <option value="_Modified">Antigas modificações</option>
+      </select>
+    </div>
+  </div>
+</div>
+<div class="d-flex justify-content-center mt-3">
+  <div *ngIf="!characters[0]" class="spinner-border" role="status">
+    <span class="visually-hidden">Loading...</span>
+  </div>
+</div>
+<div class="row justify-content-md-center" *ngIf="!!characters[0]">
+  <ul class="row row-cols-1 row-cols-md-4 g-4 mt-1">
+    <div *ngFor="let character of characters" class="col">
+      <div class="card h-100">
+        <img src="{{character.thunbnail.path}}.{{character.thunbnail.extension}}" class="card-img-top" style="height: 300px; object-fit: cover;">
+        <div class="card-body">
+          <h5 class="card-title">{{character.name}}</h5>
+          <p class="card-text" style="-webkit-line-clamp: 3; display: -webkit-box; -webkit-box-orient: vertical; overflow: hidden;">{{character.description ? character.description : "No Description :("}}</p>
+        </div>
+        <div class="card-footer">
+          <button (click)="openModal(character.id)" type="button" data-bs-toggle="modal" data-bs-target="#characterModal" class="text-muted btn btn-link">+Detalhes</button>
+        </div>
+      </div>
+    </div>
+  </ul>
+  <nav aria-label="Page navigation" class="mt-3">
+    <ul class="pagination justify-content-end">
+      <li *ngIf="infoPage.currentPage + 1 > 1" class="page-item">
+        <a (click)="prevPage(true)" class="page-link" href="#" aria-label="Previous">
+          <span aria-hidden="true">Primeira</span>
+        </a>
+      </li>
+      <li *ngIf="infoPage.currentPage + 1 > 1" class="page-item">
+        <a (click)="prevPage()" class="page-link" href="#" aria-label="Previous">
+          <span aria-hidden="true">&laquo;</span>
+        </a>
+      </li>
+      <li class="page-item active"><a class="page-link" href="#">{{infoPage.currentPage + 1}} de {{infoPage.totalPages}}</a></li>
+      <li *ngIf="infoPage.currentPage + 1 !== infoPage.totalPages" class="page-item">
+        <a (click)="nextPage()" class="page-link" href="#" aria-label="Next">
+          <span aria-hidden="true">&raquo;</span>
+        </a>
+      </li>
+      <li *ngIf="infoPage.currentPage + 1 !== infoPage.totalPages" class="page-item">
+        <a (click)="nextPage(true)" class="page-link" href="#" aria-label="Next">
+          <span aria-hidden="true">Ultima</span>
+        </a>
+      </li>
+    </ul>
+  </nav>
+</div>
