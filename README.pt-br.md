@@ -55,6 +55,7 @@ cd ./MarvelComicsEcori
 dotnet restore
 dotnet clean
 dotnet build
+#nesse momento pode demorar um pouco
 
 #Por fim acesse o diretorio do domain app
 cd ./MarvelComicsEcori.App
@@ -72,6 +73,11 @@ dotnet run
 
 ```bash
 #Faça clone
+git clone <repo>
+#Abra a soution no vs
+#Selecione MarvelComicsEcori.App
+#Rode a aplicação
+#nesse momento vai baixar os pacotes pode demorar um pouco
 ```
 ---------------
 <h2 align="center">
