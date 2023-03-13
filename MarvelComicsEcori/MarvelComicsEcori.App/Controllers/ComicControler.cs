@@ -14,10 +14,10 @@ public class ComicControler : ControllerBase
         _mediator = mediator;
     }
 
-    [HttpGet("comic/{id:int}")]
-    public async Task<IActionResult> GetById(int id)
+    [HttpGet("comic/{idCharacter:int}")]
+    public async Task<IActionResult> GetById(int idCharacter)
     {
-        var query = new GetByIdComicQuery(id);
+        var query = new GetByIdComicQuery(idCharacter);
         var comics = await _mediator.Send(query);
         return Ok(comics);
     }

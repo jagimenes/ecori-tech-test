@@ -21,7 +21,7 @@ void ConfigureApp(WebApplication app)
     app.UseSwagger();
     app.UseSwaggerUI(c =>
     {
-        c.SwaggerEndpoint("/swagger/v1/swagger.json", "My API V1");
+        c.SwaggerEndpoint("/swagger/v1/swagger.json", "Marvel Comics API");
     });
     app.UseHttpsRedirection();
     app.UseStaticFiles();
@@ -44,7 +44,7 @@ void ConfigureService(IServiceCollection services)
     services.AddMediatR(typeof(GetAllCharactersQuery));
     services.AddSwaggerGen(c =>
     {
-        c.SwaggerDoc("v1", new OpenApiInfo { Title = "My API", Version = "v1" });
+        c.SwaggerDoc("v1", new OpenApiInfo { Title = "Marvel Comics API", Version = "v1" });
     });
     services.AddControllersWithViews().AddJsonOptions(options => { options.JsonSerializerOptions.Converters.Add(new JsonStringEnumConverter()); }); ;
     services.AddEndpointsApiExplorer();

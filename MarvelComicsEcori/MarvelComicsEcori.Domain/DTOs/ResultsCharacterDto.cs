@@ -11,31 +11,31 @@ public class ResultsCharacterDto
     }
 
     [JsonProperty("id")]
-    public long Id { get; private set; }
+    public long Id { get; set; }
 
     [JsonProperty("name")]
-    public string Name { get; private set; }
+    public string Name { get; set; }
 
     [JsonProperty("description")]
-    public string Description { get; private set; }
+    public string Description { get; set; }
 
     [JsonProperty("modified")]
-    public DateTime Modified { get; private set; }
+    public string Modified { get; set; }
 
     [JsonProperty("resourceURI")]
-    public string ResourceURI { get; private set; }
+    public string ResourceURI { get; set; }
 
     [JsonProperty("urls")]
-    public List<UrlVo> Urls { get; private set; }
+    public List<UrlVo> Urls { get; set; }
 
     [JsonProperty("thumbnail")]
-    public ImageVo Thunbnail { get; private set; }
+    public ImageVo Thunbnail { get; set; }
 
     [JsonProperty("comics")]
-    public ComicVo Comics { get; private set; }
+    public ComicVo Comics { get; set; }
 
-    public StoryVo Storys { get; private set; }
+    public StoryVo Storys { get; set; }
 
     [JsonProperty("series")]
-    public SeriesVo Series { get; private set; }
+    public SeriesVo Series { get; set; }
 }

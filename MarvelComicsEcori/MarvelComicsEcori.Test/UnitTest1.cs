@@ -1,3 +1,7 @@
+using MarvelComicsEcori.Domain.Queries;
+using MarvelComicsEcori.Domain.Repositories;
+using Moq;
+
 namespace MarvelComicsEcori.Test
 {
     [TestClass]
