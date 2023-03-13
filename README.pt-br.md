@@ -86,6 +86,9 @@ git clone <repo>
 <h3>features back-end:</h3>
 <ul>
   <li>
+    O Front é executado pelo Microsoft.AspNetCore.SpaProxy para executar o front e o back juntos
+  </li>
+  <li>
     Documentação no swagger
   </li>
   <li>Padrão CQRS implementado - nesse caso so tinha necessidade das querys para buscas</li>
