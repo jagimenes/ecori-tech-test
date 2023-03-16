@@ -88,6 +88,29 @@
         "frameworkReferences": [
           "Microsoft.AspNetCore.App"
         ]
+      },
+      "EcoriTechTest.Domain/1.0.0": {
+        "type": "project",
+        "framework": ".NETCoreApp,Version=v6.0",
+        "dependencies": {
+          "EcoriTechTest.Domain.Model": "1.0.0"
+        },
+        "compile": {
+          "bin/placeholder/EcoriTechTest.Domain.dll": {}
+        },
+        "runtime": {
+          "bin/placeholder/EcoriTechTest.Domain.dll": {}
+        }
+      },
+      "EcoriTechTest.Domain.Model/1.0.0": {
+        "type": "project",
+        "framework": ".NETCoreApp,Version=v6.0",
+        "compile": {
+          "bin/placeholder/EcoriTechTest.Domain.Model.dll": {}
+        },
+        "runtime": {
+          "bin/placeholder/EcoriTechTest.Domain.Model.dll": {}
+        }
       }
     }
   },
@@ -216,10 +239,22 @@
         "swashbuckle.aspnetcore.swaggerui.6.2.3.nupkg.sha512",
         "swashbuckle.aspnetcore.swaggerui.nuspec"
       ]
+    },
+    "EcoriTechTest.Domain/1.0.0": {
+      "type": "project",
+      "path": "../EcoriTechTest.Domain/EcoriTechTest.Domain.csproj",
+      "msbuildProject": "../EcoriTechTest.Domain/EcoriTechTest.Domain.csproj"
+    },
+    "EcoriTechTest.Domain.Model/1.0.0": {
+      "type": "project",
+      "path": "../EcoriTechTest.Domain.Model/EcoriTechTest.Domain.Model.csproj",
+      "msbuildProject": "../EcoriTechTest.Domain.Model/EcoriTechTest.Domain.Model.csproj"
     }
   },
   "projectFileDependencyGroups": {
     "net6.0": [
+      "EcoriTechTest.Domain >= 1.0.0",
+      "EcoriTechTest.Domain.Model >= 1.0.0",
       "Swashbuckle.AspNetCore >= 6.2.3"
     ]
   },
@@ -255,7 +290,14 @@
       "frameworks": {
         "net6.0": {
           "targetAlias": "net6.0",
-          "projectReferences": {}
+          "projectReferences": {
+            "C:\\Fontes\\ecori-tech-test\\EcoriTechTest.Domain.Model\\EcoriTechTest.Domain.Model.csproj": {
+              "projectPath": "C:\\Fontes\\ecori-tech-test\\EcoriTechTest.Domain.Model\\EcoriTechTest.Domain.Model.csproj"
+            },
+            "C:\\Fontes\\ecori-tech-test\\EcoriTechTest.Domain\\EcoriTechTest.Domain.csproj": {
+              "projectPath": "C:\\Fontes\\ecori-tech-test\\EcoriTechTest.Domain\\EcoriTechTest.Domain.csproj"
+            }
+          }
         }
       },
       "warningProperties": {

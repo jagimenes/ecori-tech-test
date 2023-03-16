@@ -10,4 +10,9 @@
     <PackageReference Include="Swashbuckle.AspNetCore" Version="6.2.3" />
   </ItemGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\EcoriTechTest.Domain.Model\EcoriTechTest.Domain.Model.csproj" />
+    <ProjectReference Include="..\EcoriTechTest.Domain\EcoriTechTest.Domain.csproj" />
+  </ItemGroup>
+
 </Project>

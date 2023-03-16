@@ -9,6 +9,10 @@ C:\Fontes\ecori-tech-test\EcoriTechTest.Api\bin\Debug\net6.0\Microsoft.OpenApi.d
 C:\Fontes\ecori-tech-test\EcoriTechTest.Api\bin\Debug\net6.0\Swashbuckle.AspNetCore.Swagger.dll
 C:\Fontes\ecori-tech-test\EcoriTechTest.Api\bin\Debug\net6.0\Swashbuckle.AspNetCore.SwaggerGen.dll
 C:\Fontes\ecori-tech-test\EcoriTechTest.Api\bin\Debug\net6.0\Swashbuckle.AspNetCore.SwaggerUI.dll
+C:\Fontes\ecori-tech-test\EcoriTechTest.Api\bin\Debug\net6.0\EcoriTechTest.Domain.dll
+C:\Fontes\ecori-tech-test\EcoriTechTest.Api\bin\Debug\net6.0\EcoriTechTest.Domain.Model.dll
+C:\Fontes\ecori-tech-test\EcoriTechTest.Api\bin\Debug\net6.0\EcoriTechTest.Domain.Model.pdb
+C:\Fontes\ecori-tech-test\EcoriTechTest.Api\bin\Debug\net6.0\EcoriTechTest.Domain.pdb
 C:\Fontes\ecori-tech-test\EcoriTechTest.Api\obj\Debug\net6.0\EcoriTechTest.Api.csproj.AssemblyReference.cache
 C:\Fontes\ecori-tech-test\EcoriTechTest.Api\obj\Debug\net6.0\EcoriTechTest.Api.GeneratedMSBuildEditorConfig.editorconfig
 C:\Fontes\ecori-tech-test\EcoriTechTest.Api\obj\Debug\net6.0\EcoriTechTest.Api.AssemblyInfoInputs.cache

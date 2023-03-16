@@ -1,11 +1,30 @@
 {
   "version": 3,
   "targets": {
-    "net6.0": {}
+    "net6.0": {
+      "EcoriTechTest.Domain.Model/1.0.0": {
+        "type": "project",
+        "framework": ".NETCoreApp,Version=v6.0",
+        "compile": {
+          "bin/placeholder/EcoriTechTest.Domain.Model.dll": {}
+        },
+        "runtime": {
+          "bin/placeholder/EcoriTechTest.Domain.Model.dll": {}
+        }
+      }
+    }
   },
-  "libraries": {},
+  "libraries": {
+    "EcoriTechTest.Domain.Model/1.0.0": {
+      "type": "project",
+      "path": "../EcoriTechTest.Domain.Model/EcoriTechTest.Domain.Model.csproj",
+      "msbuildProject": "../EcoriTechTest.Domain.Model/EcoriTechTest.Domain.Model.csproj"
+    }
+  },
   "projectFileDependencyGroups": {
-    "net6.0": []
+    "net6.0": [
+      "EcoriTechTest.Domain.Model >= 1.0.0"
+    ]
   },
   "packageFolders": {
     "C:\\Users\\mario\\.nuget\\packages\\": {},
@@ -39,7 +58,11 @@
       "frameworks": {
         "net6.0": {
           "targetAlias": "net6.0",
-          "projectReferences": {}
+          "projectReferences": {
+            "C:\\Fontes\\ecori-tech-test\\EcoriTechTest.Domain.Model\\EcoriTechTest.Domain.Model.csproj": {
+              "projectPath": "C:\\Fontes\\ecori-tech-test\\EcoriTechTest.Domain.Model\\EcoriTechTest.Domain.Model.csproj"
+            }
+          }
         }
       },
       "warningProperties": {

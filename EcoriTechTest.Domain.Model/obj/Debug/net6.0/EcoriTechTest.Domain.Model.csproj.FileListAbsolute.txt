@@ -1,0 +1,12 @@
+C:\Fontes\ecori-tech-test\EcoriTechTest.Domain.Model\bin\Debug\net6.0\EcoriTechTest.Domain.Model.deps.json
+C:\Fontes\ecori-tech-test\EcoriTechTest.Domain.Model\bin\Debug\net6.0\EcoriTechTest.Domain.Model.dll
+C:\Fontes\ecori-tech-test\EcoriTechTest.Domain.Model\bin\Debug\net6.0\EcoriTechTest.Domain.Model.pdb
+C:\Fontes\ecori-tech-test\EcoriTechTest.Domain.Model\obj\Debug\net6.0\EcoriTechTest.Domain.Model.csproj.AssemblyReference.cache
+C:\Fontes\ecori-tech-test\EcoriTechTest.Domain.Model\obj\Debug\net6.0\EcoriTechTest.Domain.Model.GeneratedMSBuildEditorConfig.editorconfig
+C:\Fontes\ecori-tech-test\EcoriTechTest.Domain.Model\obj\Debug\net6.0\EcoriTechTest.Domain.Model.AssemblyInfoInputs.cache
+C:\Fontes\ecori-tech-test\EcoriTechTest.Domain.Model\obj\Debug\net6.0\EcoriTechTest.Domain.Model.AssemblyInfo.cs
+C:\Fontes\ecori-tech-test\EcoriTechTest.Domain.Model\obj\Debug\net6.0\EcoriTechTest.Domain.Model.csproj.CoreCompileInputs.cache
+C:\Fontes\ecori-tech-test\EcoriTechTest.Domain.Model\obj\Debug\net6.0\EcoriTechTest.Domain.Model.dll
+C:\Fontes\ecori-tech-test\EcoriTechTest.Domain.Model\obj\Debug\net6.0\refint\EcoriTechTest.Domain.Model.dll
+C:\Fontes\ecori-tech-test\EcoriTechTest.Domain.Model\obj\Debug\net6.0\EcoriTechTest.Domain.Model.pdb
+C:\Fontes\ecori-tech-test\EcoriTechTest.Domain.Model\obj\Debug\net6.0\ref\EcoriTechTest.Domain.Model.dll

@@ -1,6 +1,6 @@
 ﻿namespace EcoriTechTest.Domain.Model.Dtos
 {
-    public class CharacterDataWrapper
+    public class DataWrapper<T>
     {
         public int Code { get; set; }
 
@@ -12,7 +12,7 @@
 
         public string AttributionHTML { get; set; }
 
-        public CharacterDataContainer Data { get; set; }
+        public DataContainer<T> Data { get; set; }
 
         public string Etag { get; set; }
     }

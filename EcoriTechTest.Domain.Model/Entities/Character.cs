@@ -1,8 +1,9 @@
-﻿using EcoriTechTest.Domain.Model.ValueObjects;
+﻿using EcoriTechTest.Domain.Model.Interfaces;
+using EcoriTechTest.Domain.Model.ValueObjects;
 
 namespace EcoriTechTest.Domain.Model.Entities
 {
-    public class Character
+    public class Character : IEntity
     {
         public int Id { get; set; }
 
@@ -10,7 +11,7 @@ namespace EcoriTechTest.Domain.Model.Entities
 
         public string Description { get; set; }
 
-        public DateTime Modified { get; set; }
+        public DateTimeOffset Modified { get; set; }
 
         public string ResourceURI { get; set; }
 
@@ -18,12 +19,12 @@ namespace EcoriTechTest.Domain.Model.Entities
 
         public Image Thumbnail { get; set; }
 
-        public List<ComicList> Comics { get; set; }
+        public ComicList Comics { get; set; }
 
-        public List<StoryList> Stories { get; set; }
+        public StoryList Stories { get; set; }
 
-        public List<EventList> Events { get; set; }
+        public EventList Events { get; set; }
 
-        public List<SeriesList> Series { get; set; }
+        public SeriesList Series { get; set; }
     }
 }

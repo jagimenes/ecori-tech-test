@@ -1,6 +1,8 @@
-﻿namespace EcoriTechTest.Domain.Model.ValueObjects
+﻿using EcoriTechTest.Domain.Model.ValueObjects.Base;
+
+namespace EcoriTechTest.Domain.Model.ValueObjects
 {
-    public class EventList : List<EventSummary>
+    public class EventList : ListBase<EventSummary>
     {
     }
 }
