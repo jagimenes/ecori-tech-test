@@ -18,24 +18,23 @@ e depois dentro da pasta do projeto API execute o comando
 
 ## Inciar o WebApp
 
-Para inciar o WebApp será necessário configurar o endereço da API que foi disponibilizado ao iniciar o projeto API, para isso voce deve informar o endereço dentro do arquivo 
+Para iniciar o WebApp é necessário configurar o arquivo
 
 ```bash
   character.service.ts
 ```
-que está dentro do caminho
+que esta no caminho
 
 ```bash
   EcoriTechTest.WebApp\src\app\character\services
 ```
-
-e alterar a variável
+Para isso, inicie o projeto API, e o endereço que for exibido deverá ser copiado para a variável
 
 ```bash
   baseUrl = "https:localhost:7098";
 ```
 
-depois de configurado o endereço do 'baseUrl' basta acessar o projeto WebApp via terminal apartiar do caminho raiz da aplicação com o comando
+depois de configurado o endereço do 'baseUrl' basta acessar o projeto WebApp via terminal a partir do caminho raiz da aplicação com o comando
 
 ```bash
   cd EcoriTechTest.WebApp
