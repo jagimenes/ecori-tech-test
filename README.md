@@ -23,7 +23,7 @@ Para iniciar o WebApp é necessário configurar o arquivo
 ```bash
   character.service.ts
 ```
-que esta no caminho
+que está no caminho
 
 ```bash
   EcoriTechTest.WebApp\src\app\character\services
