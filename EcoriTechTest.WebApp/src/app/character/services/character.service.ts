@@ -9,12 +9,12 @@ import { CharacterDataContainer } from '../models/dto/character-data-container';
 })
 
 export class CharacterService {
-  baseUrl = "https:localhost:7098/Character";
-
+  baseUrl = "https:localhost:7098";
+  serviceUrl = `${this.baseUrl}/Character`;
   constructor(private http: HttpClient) { }
 
   GetWithFilter(filter: string): Observable<CharacterDataContainer> {
-    let url = this.baseUrl;
+    let url = this.serviceUrl;
     if (filter)
       url += "?" + filter;
 
@@ -22,6 +22,6 @@ export class CharacterService {
   }
 
   Get(id: number): Observable<Character> {
-    return this.http.get<Character>(this.baseUrl+"/"+ id);
+    return this.http.get<Character>(this.serviceUrl+"/"+ id);
   }
 }
