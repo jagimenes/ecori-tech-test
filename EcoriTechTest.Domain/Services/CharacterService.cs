@@ -21,6 +21,9 @@ namespace EcoriTechTest.Domain.Services
 
         public async Task<DataContainer<Character>> Get(string queryString = null)
         {
+            if(queryString?.First() == '?')
+                queryString = queryString.Remove(0, 1);
+
             var dataWrapper = await _proxy.Get<Character>(queryString);
             return dataWrapper?.Data;
         }
