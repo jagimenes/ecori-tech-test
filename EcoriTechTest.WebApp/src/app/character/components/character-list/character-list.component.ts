@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { debounceTime, distinctUntilChanged, finalize, Subject } from 'rxjs';
 import { Character } from '../../models/character';
 import { CharacterDataContainer } from '../../models/dto/character-data-container';
@@ -16,7 +17,7 @@ export class CharacterListComponent implements OnInit{
     loading: boolean = false;
     textFilterUpdate = new Subject<string>();
     
-    constructor(private characterService: CharacterService) {
+    constructor(private characterService: CharacterService, private router: Router) {
       this.textFilterUpdate.pipe(
         debounceTime(1000),
         distinctUntilChanged())
@@ -67,5 +68,9 @@ export class CharacterListComponent implements OnInit{
 
     GetCharaceterDescription(character: Character) : string{
       return character.description ? `${character.description.substring(0, 145)}...` :"Character has no description.";
+    }
+
+    ViewCharacter(character: Character): void{
+      this.router.navigate(['/character', character.id])
     }
 }
