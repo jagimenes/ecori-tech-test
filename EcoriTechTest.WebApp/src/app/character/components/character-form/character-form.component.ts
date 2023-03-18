@@ -23,17 +23,18 @@ export class CharacterFormComponent implements OnInit {
     this.loading = true;
     let routeId = Number(this.route.snapshot.paramMap.get('id'));
     if(routeId){
-      this.characterService.Get(routeId).pipe(
-        finalize(() => this.loading = false)
-      ).subscribe(result => {
-        this.model = result;
-        if(this.model.id == 0){
-          this.error = "Character not found."
-        }
-        else{
-          this.imagePath = `${this.model.thumbnail.path}.${this.model.thumbnail.extension}`;
-        }
-      });
+        this.characterService.Get(routeId).pipe(
+          finalize(() => this.loading = false)
+        ).subscribe(result => {
+          this.model = result;
+          console.log(result)
+          if(this.model.id == 0){
+            this.error = "Character not found."
+          }
+          else{
+            this.imagePath = `${this.model.thumbnail.path}.${this.model.thumbnail.extension}`;
+          }
+        });
     }
     else{
       this.error = "Invalid id.";
@@ -46,7 +47,7 @@ export class CharacterFormComponent implements OnInit {
   }
 
   GetClassUrl(url: UrlValue): string{
-    let badgeClass = "me-1 badge";
+    let badgeClass = "me-1 cursor-pointer text-white badge";
     if(url.type == 'wiki')
       badgeClass += ' text-bg-primary';
 
@@ -57,5 +58,9 @@ export class CharacterFormComponent implements OnInit {
       badgeClass += ' text-bg-danger';
 
     return badgeClass;
+  }
+
+  OpenUrl(url: UrlValue): void{
+    window.open(url.url, '_blank');
   }
 }
