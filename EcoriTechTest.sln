@@ -1,0 +1,51 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.0.31903.59
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EcoriTechTest.Api", "EcoriTechTest.Api\EcoriTechTest.Api.csproj", "{21E4FE4E-DDFF-4A84-9A46-02374B6F1271}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EcoriTechTest.Domain", "EcoriTechTest.Domain\EcoriTechTest.Domain.csproj", "{EDB986B7-6F70-45E6-9E29-B936FCBA2B3D}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EcoriTechTest.Domain.Model", "EcoriTechTest.Domain.Model\EcoriTechTest.Domain.Model.csproj", "{1AE6378D-52AD-4F95-91A7-2185EB32A8E8}"
+EndProject
+Project("{54A90642-561A-4BB1-A94E-469ADEE60C69}") = "EcoriTechTest.WebApp", "EcoriTechTest.WebApp\EcoriTechTest.WebApp.esproj", "{76E9482C-EA28-4DF9-BB8C-F6E5AF20E3B0}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EcoriTechTest.Test", "EcoriTechTest.Test\EcoriTechTest.Test.csproj", "{B831AA7E-79D1-4804-BFE0-D575FB9D83C9}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{21E4FE4E-DDFF-4A84-9A46-02374B6F1271}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{21E4FE4E-DDFF-4A84-9A46-02374B6F1271}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{21E4FE4E-DDFF-4A84-9A46-02374B6F1271}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{21E4FE4E-DDFF-4A84-9A46-02374B6F1271}.Release|Any CPU.Build.0 = Release|Any CPU
+		{EDB986B7-6F70-45E6-9E29-B936FCBA2B3D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{EDB986B7-6F70-45E6-9E29-B936FCBA2B3D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{EDB986B7-6F70-45E6-9E29-B936FCBA2B3D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{EDB986B7-6F70-45E6-9E29-B936FCBA2B3D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{1AE6378D-52AD-4F95-91A7-2185EB32A8E8}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{1AE6378D-52AD-4F95-91A7-2185EB32A8E8}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{1AE6378D-52AD-4F95-91A7-2185EB32A8E8}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{1AE6378D-52AD-4F95-91A7-2185EB32A8E8}.Release|Any CPU.Build.0 = Release|Any CPU
+		{76E9482C-EA28-4DF9-BB8C-F6E5AF20E3B0}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{76E9482C-EA28-4DF9-BB8C-F6E5AF20E3B0}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{76E9482C-EA28-4DF9-BB8C-F6E5AF20E3B0}.Debug|Any CPU.Deploy.0 = Debug|Any CPU
+		{76E9482C-EA28-4DF9-BB8C-F6E5AF20E3B0}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{76E9482C-EA28-4DF9-BB8C-F6E5AF20E3B0}.Release|Any CPU.Build.0 = Release|Any CPU
+		{76E9482C-EA28-4DF9-BB8C-F6E5AF20E3B0}.Release|Any CPU.Deploy.0 = Release|Any CPU
+		{B831AA7E-79D1-4804-BFE0-D575FB9D83C9}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B831AA7E-79D1-4804-BFE0-D575FB9D83C9}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B831AA7E-79D1-4804-BFE0-D575FB9D83C9}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B831AA7E-79D1-4804-BFE0-D575FB9D83C9}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {55486FF8-FF98-451A-AA6B-B7E2D1F78E97}
+	EndGlobalSection
+EndGlobal

@@ -1,0 +1,87 @@
+<nav class="mt-2" 
+    aria-label="breadcrumb"
+    style="--bs-breadcrumb-divider: url(&#34;data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='8' height='8'%3E%3Cpath d='M2.5 0L1 1.5 3.5 4 1 6.5 2.5 8l4-4-4-4z' fill='currentColor'/%3E%3C/svg%3E&#34;);">
+  <ol class="breadcrumb">
+    <li class="breadcrumb-item"><a routerLink="" href="javascript:void(0)">Home</a></li>
+    <li class="breadcrumb-item active" *ngIf="this.model.id > 0" aria-current="page">{{this.model.name}}</li>
+  </ol>
+</nav>
+
+<div class="row">
+    <div class="col-12 mt-3 d-flex justify-content-center align-items-center" *ngIf="this.error || (!this.loading && this.model.id == 0)">
+        <h3>{{this.error}}</h3>
+    </div>
+    <div class="col-12 mt-3 d-flex justify-content-center align-items-center" *ngIf="this.loading">
+        <h3>Loading...</h3>
+    </div>
+    <div class="col-12 mt-3" *ngIf="this.model.id > 0">
+        <div class="row">
+            <div class="col-12 col-md-5 col-lg-3">
+                <img src={{this.imagePath}} alt="..." class="img-thumbnail image-size">
+            </div>
+            <div class="col-12 col-md-7 col-lg-9 d-flex flex-column">
+                <label><strong>Name:</strong> {{this.model.name}}</label>
+                <label><strong>Description:</strong> {{this.model.description}}</label>
+                <div class="w-100 d-flex flex-wrap">
+                    <span [ngClass]="GetClassUrl(url)"
+                        *ngFor="let url of this.model.urls"
+                        (click)="OpenUrl(url)">
+                        {{url.type}}
+                    </span>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="col-12 mt-2" *ngIf="this.model.id > 0">
+        <ul class="nav nav-tabs">
+            <li class="nav-item">
+              <a [ngClass]="this.selectedTab == 0 ? 'nav-link active' : 'nav-link'" aria-current="page" href="javascript:void(0)" (click)="SetTab(0)">Comics</a>
+            </li>
+            <li class="nav-item">
+              <a [ngClass]="this.selectedTab == 1 ? 'nav-link active' : 'nav-link'" href="javascript:void(0)" (click)="SetTab(1)">Events</a>
+            </li>
+            <li class="nav-item">
+              <a [ngClass]="this.selectedTab == 2 ? 'nav-link active' : 'nav-link'" href="javascript:void(0)" (click)="SetTab(2)">Series</a>
+            </li>
+            <li class="nav-item">
+                <a [ngClass]="this.selectedTab == 3 ? 'nav-link active' : 'nav-link'" href="javascript:void(0)" (click)="SetTab(3)">Stories</a>
+              </li>
+        </ul>
+        <div class="w-100 table-responsive mt-1" *ngIf="this.selectedTab == 0">
+            <table class="table">
+                <tbody>
+                    <tr *ngFor="let item of this.model.comics.items">
+                      <td>{{item.name}}</td>
+                    </tr>
+                  </tbody>
+            </table>
+        </div>
+        <div class="w-100 table-responsive mt-1" *ngIf="this.selectedTab == 1">
+            <table class="table">
+                <tbody>
+                    <tr *ngFor="let item of this.model.events.items">
+                      <td>{{item.name}}</td>
+                    </tr>
+                  </tbody>
+            </table>
+        </div>
+        <div class="w-100 table-responsive mt-1" *ngIf="this.selectedTab == 2">
+            <table class="table">
+                <tbody>
+                    <tr *ngFor="let item of this.model.series.items">
+                      <td>{{item.name}}</td>
+                    </tr>
+                  </tbody>
+            </table>
+        </div>
+        <div class="w-100 table-responsive mt-1" *ngIf="this.selectedTab == 3">
+            <table class="table">
+                <tbody>
+                    <tr *ngFor="let item of this.model.stories.items">
+                      <td>{{item.name}}</td>
+                    </tr>
+                  </tbody>
+            </table>
+        </div>
+    </div>
+</div>

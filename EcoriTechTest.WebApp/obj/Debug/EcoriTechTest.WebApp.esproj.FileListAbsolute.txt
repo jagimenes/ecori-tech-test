@@ -1,0 +1,2 @@
+C:\Fontes\ecori-tech-test\EcoriTechTest.WebApp\obj\Debug\EcoriTechTest.WebApp.esproj.SuggestedBindingRedirects.cache
+C:\Fontes\ecori-tech-test\EcoriTechTest.WebApp\obj\Debug\EcoriTechTest.WebApp.esproj.CoreCompileInputs.cache

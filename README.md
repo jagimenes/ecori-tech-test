@@ -1,27 +1,48 @@
-[![pt-br](https://img.shields.io/badge/lang-pt--br-green.svg)](https://github.com/jagimenes/ecori-tech-test/blob/main/README.pt-br.md)
 
-## Tech test to integrate the Ecori Team ☀
+## Como iniciar a aplicação
 
-<br>
+Para inciar a aplicação será necessário inciar o projeto API e o projeto WebApp
 
-## Create a Rest API and a SPA that consumes and shows the official [Marvel Comics API](https://developer.marvel.com/docs).
+## Inciar a API
 
-## :computer: Functionalities (Back-end)
-🔴 A route of **character list**, accepting parameters of filters and pagination;<br>
-🔴 A route of **character details**, taking the character id as a parameter;<br>
+Para iniciar a API, via terminal acesse a pasta em que foi realizado o clone da aplicacao, e posteriormente acesse a pasta do projeto API com o comando:
+```bash
+  cd EcoriTechTest.Api
+```
 
-## :computer: Functionalities (Front-end)
-🔴 A page of **character list**, using parameters, filters and pagination created before;<br>
-🔴 A page of **character details**, that shows all info returned from the backend by clicking on a character on the list created before;<br>
+e depois dentro da pasta do projeto API execute o comando 
+    
+```bash
+  dotnet run
+```
 
-## Technologies and tools you have to use:
-☑️ [.Net 6](https://dotnet.microsoft.com/pt-br/) <br>
-☑️ [Angular](https://angular.io/) <br>
-☑️ Be free to use any other tools/tecs if you need <br>
+## Inciar o WebApp
 
-## Start instructions
-- Create a fork of this project
-- Do all the tasks to complete the application
-- Create a README.md showing the steps to run the application
-- Make a merge request on the main branch
-- Send us the link of the merge request
+Para iniciar o WebApp é necessário configurar o arquivo
+
+```bash
+  character.service.ts
+```
+que está no caminho
+
+```bash
+  EcoriTechTest.WebApp\src\app\character\services
+```
+Para isso, inicie o projeto API, e o endereço que for exibido deverá ser copiado para a variável
+
+```bash
+  baseUrl = "https:localhost:7098";
+```
+
+depois de configurado o endereço do 'baseUrl' basta acessar o projeto WebApp via terminal a partir do caminho raiz da aplicação com o comando
+
+```bash
+  cd EcoriTechTest.WebApp
+```
+
+e posteriormente dentro da pasta do projeto WebApp executar os comandos via terminal
+
+```bash
+  npm install
+  ng serve -o
+```
