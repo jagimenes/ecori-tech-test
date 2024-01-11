@@ -23,7 +23,9 @@
 ☑️ [Javascript](https://developer.mozilla.org/en-US/docs/Web/JavaScript) <br>
 ☑️ [Node.js](https://nodejs.org/) <br>
 ☑️ [React](https://react.dev/) <br>
-❗ It would be incredible if you could provide us with an application with **tests** <br>
+☑️ [PostgreSQL](https://www.postgresql.org/) <br>
+❗ It would be awesome, if you could provide us with an application with **tests** <br>
+❗ It would be awesome, if you implemented some treatment for concurrency in the data update routes <br>
 
 ## Start instructions
 - Create a fork of this project
