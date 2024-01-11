@@ -4,20 +4,26 @@
 
 <br>
 
-## Create a Rest API and a SPA that consumes and shows the official [Marvel Comics API](https://developer.marvel.com/docs).
+## Create a Rest API and a task management SPA. <br>
 
 ## :computer: Functionalities (Back-end)
-🔴 A route of **character list**, accepting parameters of filters and pagination;<br>
-🔴 A route of **character details**, taking the character id as a parameter;<br>
+🔴 A route of **tasks listing**, receiving parameters like filters (_title_ ou _description_) and pagination (_page_ e _pageSize_);<br>
+🔴 A route of **task creation**, receiving fields, _title_, _description_. The complete object, on database, should have more 3 fields: _completed_at_ (to control when the task is done), _created_at_ (to control when the task was created) and _updated_at_ (to control when the task was updated);<br>
+🔴 A route of **task update**, receiving by route params the task _id_, and receiving fields like _title_, _description_;<br>
+🔴 A route of **task removal**, receiving by route params the task _id_;<br>
+🔴 A route of **mark task as done**, receiving by route params the task _id_;<br>
+**Other suggestions**<br>
+🟢 **Bonus 1**: Importing tasks, with a list of _title_ and _description_, from a CSV file;<br>
+🟢 **Bonus 2**: Auth control with login;<br>
 
 ## :computer: Functionalities (Front-end)
-🔴 A page of **character list**, using parameters, filters and pagination created before;<br>
-🔴 A page of **character details**, that shows all info returned from the backend by clicking on a character on the list created before;<br>
+🔴Implement all backend functionalities <br>
 
 ## Technologies and tools you have to use:
-☑️ [.Net 6](https://dotnet.microsoft.com/pt-br/) <br>
-☑️ [Angular](https://angular.io/) <br>
-☑️ Be free to use any other tools/tecs if you need <br>
+☑️ [Javascript](https://developer.mozilla.org/en-US/docs/Web/JavaScript) <br>
+☑️ [Node.js](https://nodejs.org/) <br>
+☑️ [React](https://react.dev/) <br>
+❗ It would be incredible if you could provide us with an application with **tests** <br>
 
 ## Start instructions
 - Create a fork of this project
