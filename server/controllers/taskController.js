@@ -18,8 +18,34 @@ exports.createTask = async (req, res) => {
 };
 
 exports.getAllTasks = async (req, res) => {
+  const { title, description, completed, page = 1, pageSize = 10 } = req.query;
+
   try {
-    const { rows } = await pool.query('SELECT * FROM tasks');
+    let query = 'SELECT * FROM tasks WHERE 1=1';
+    const queryParams = [];
+
+    if (title) {
+      query += ` AND title ILIKE $${queryParams.length + 1}`;
+      queryParams.push(`%${title}%`);
+    }
+
+    if (description) {
+      query += ` AND description ILIKE $${queryParams.length + 1}`;
+      queryParams.push(`%${description}%`);
+    }
+
+    if (completed) {
+      query += ` AND completed_at = $${queryParams.length + 1}`;
+      queryParams.push(completed);
+    }
+
+    const offset = (page - 1) * pageSize;
+    query += ` ORDER BY id OFFSET $${queryParams.length + 1} LIMIT $${
+      queryParams.length + 2
+    }`;
+    queryParams.push(offset.toString(), pageSize);
+
+    const { rows } = await pool.query(query, queryParams);
     return res.status(200).send(rows);
   } catch (err) {
     console.error('Erro ao obter todas as tarefas:', err);
