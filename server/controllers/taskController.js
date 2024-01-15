@@ -96,6 +96,29 @@ exports.updateTask = async (req, res) => {
   }
 };
 
+exports.updateCheckTask = async (req, res) => {
+  const { id } = req.params;
+  const { completed } = req.body;
+  if (completed === undefined) {
+    return res.status(400).json({ message: 'Dados de entrada inválidos' });
+  }
+  try {
+    const { rows } = await pool.query(
+      'UPDATE tasks SET completed_at = $1, updated_at = NOW() WHERE id = $2 RETURNING *',
+      [completed, id]
+    );
+    if (rows.length === 0) {
+      return res.status(404).json({ message: 'Tarefa não encontrada' });
+    }
+    return res.status(200).json(rows[0]);
+  } catch (err) {
+    console.error('Erro ao atualizar tarefa:', err);
+    return res
+      .status(500)
+      .json({ message: 'Erro interno ao atualizar tarefa' });
+  }
+};
+
 exports.deleteTask = async (req, res) => {
   const { id } = req.params;
   try {
