@@ -1,14 +1,14 @@
 const pool = require('../db');
 
 exports.createTask = async (req, res) => {
-  const { title, description, completed } = req.body;
+  const { title, description, completed_at } = req.body;
   if (!title || !description) {
     return res.status(400).json({ message: 'Dados de entrada inválidos' });
   }
   try {
     const { rows } = await pool.query(
       'INSERT INTO tasks (title, description, completed_at, created_at) VALUES ($1, $2, $3, NOW()) RETURNING *',
-      [title, description, completed]
+      [title, description, completed_at]
     );
     return res.status(201).json(rows[0]);
   } catch (err) {
@@ -18,7 +18,7 @@ exports.createTask = async (req, res) => {
 };
 
 exports.getAllTasks = async (req, res) => {
-  const { title, description, completed, page = 1, pageSize = 10 } = req.query;
+  const { title, description, completed, page = 1, pageSize = 5 } = req.query;
 
   try {
     let query = 'SELECT * FROM tasks WHERE 1=1';
@@ -109,14 +109,14 @@ exports.getTaskById = async (req, res) => {
 
 exports.updateTask = async (req, res) => {
   const { id } = req.params;
-  const { title, description, completed } = req.body;
-  if (!title || !description || typeof completed !== 'boolean') {
+  const { title, description, completed_at } = req.body;
+  if (!title || !description || typeof completed_at !== 'boolean') {
     return res.status(400).json({ message: 'Dados de entrada inválidos' });
   }
   try {
     const { rows } = await pool.query(
       'UPDATE tasks SET title = $1, description = $2, completed_at = $3, updated_at = NOW() WHERE id = $4 RETURNING *',
-      [title, description, completed, id]
+      [title, description, completed_at, id]
     );
     if (rows.length === 0) {
       return res.status(404).json({ message: 'Tarefa não encontrada' });
@@ -132,14 +132,15 @@ exports.updateTask = async (req, res) => {
 
 exports.updateCheckTask = async (req, res) => {
   const { id } = req.params;
-  const { completed } = req.body;
-  if (completed === undefined) {
+  const { completed_at } = req.body;
+
+  if (completed_at === undefined) {
     return res.status(400).json({ message: 'Dados de entrada inválidos' });
   }
   try {
     const { rows } = await pool.query(
       'UPDATE tasks SET completed_at = $1, updated_at = NOW() WHERE id = $2 RETURNING *',
-      [completed, id]
+      [completed_at, id]
     );
     if (rows.length === 0) {
       return res.status(404).json({ message: 'Tarefa não encontrada' });
@@ -168,10 +169,3 @@ exports.deleteTask = async (req, res) => {
     return res.status(500).json({ message: 'Erro interno ao excluir tarefa' });
   }
 };
-
-/* 
-create task
-    "title": "Dormir",
-    "description": "Descansar para o próximo dia",
-    "completed": false,
-*/
