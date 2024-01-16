@@ -34,19 +34,53 @@ exports.getAllTasks = async (req, res) => {
       queryParams.push(`%${description}%`);
     }
 
-    if (completed) {
+    if (completed !== undefined) {
       query += ` AND completed_at = $${queryParams.length + 1}`;
       queryParams.push(completed);
     }
 
     const offset = (page - 1) * pageSize;
-    query += ` ORDER BY id OFFSET $${queryParams.length + 1} LIMIT $${
+
+    query += ` ORDER BY id DESC OFFSET $${queryParams.length + 1} LIMIT $${
       queryParams.length + 2
     }`;
-    queryParams.push(offset.toString(), pageSize);
+    queryParams.push(offset, pageSize);
 
     const { rows } = await pool.query(query, queryParams);
-    return res.status(200).send(rows);
+
+    let totalCountQuery = 'SELECT COUNT(*) FROM tasks WHERE 1=1';
+    const totalCountParams = [];
+
+    if (title) {
+      totalCountQuery += ` AND title ILIKE $${totalCountParams.length + 1}`;
+      totalCountParams.push(`%${title}%`);
+    }
+
+    if (description) {
+      totalCountQuery += ` AND description ILIKE $${
+        totalCountParams.length + 1
+      }`;
+      totalCountParams.push(`%${description}%`);
+    }
+
+    if (completed !== undefined) {
+      totalCountQuery += ` AND completed_at = $${totalCountParams.length + 1}`;
+      totalCountParams.push(completed);
+    }
+
+    const totalCountResult = await pool.query(
+      totalCountQuery,
+      totalCountParams
+    );
+
+    const totalCount = parseInt(totalCountResult.rows[0].count, 10);
+    const totalPages = Math.ceil(totalCount / pageSize);
+
+    return res.status(200).json({
+      tasks: rows,
+      totalCount,
+      totalPages,
+    });
   } catch (err) {
     console.error('Erro ao obter todas as tarefas:', err);
     return res
