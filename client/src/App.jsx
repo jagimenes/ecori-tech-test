@@ -1,3 +1,5 @@
+/* eslint-disable react-hooks/exhaustive-deps */
+/* eslint-disable no-unused-vars */
 import { useEffect, useState } from 'react';
 import customFetch from './utils/customFetch';
 import Tasks from './Tasks';
@@ -7,12 +9,18 @@ export default function App() {
   const [title, setTitle] = useState('');
   const [description, setDescription] = useState('');
   const [editTask, setEditTask] = useState(null);
+  const [currentPage, setCurrentPage] = useState(1);
+  const [totalPages, setTotalPages] = useState(1);
+  const [totalCount, setTotalCount] = useState(0);
 
-  const getTasks = async () => {
+  const getTasks = async (page = 1) => {
     try {
-      const res = await customFetch('/tasks');
-      const { tasks } = res.data;
+      const res = await customFetch(`/tasks?page=${currentPage}`);
+      const { tasks, totalPages, totalCount } = res.data;
+      console.log(tasks, totalPages, totalCount);
       setTasks(tasks);
+      setTotalPages(totalPages);
+      setTotalCount(totalCount);
     } catch (error) {
       console.error(error);
     }
@@ -20,7 +28,7 @@ export default function App() {
 
   useEffect(() => {
     getTasks();
-  }, []);
+  }, [currentPage]);
 
   const createNewTask = async (e) => {
     e.preventDefault();
@@ -85,7 +93,7 @@ export default function App() {
             required
           />
           <button className='form__button' type='submit'>
-            {editTask ? 'Update Task' : 'Create Task'}
+            {editTask ? 'Editar Tarefa' : 'Criar Tarefa'}
           </button>
         </form>
       </div>
@@ -123,6 +131,28 @@ export default function App() {
               onEditTask={editingTask}
             />
           ))}
+
+        <div className='pagination'>
+          <button
+            onClick={() =>
+              setCurrentPage((prevPage) => Math.max(prevPage - 1, 1))
+            }
+            disabled={currentPage === 1}
+          >
+            Anterior
+          </button>
+          <span>
+            Página {currentPage} de {totalPages}, Total de Tarefas: {totalCount}
+          </span>
+          <button
+            onClick={() =>
+              setCurrentPage((prevPage) => Math.min(prevPage + 1, totalPages))
+            }
+            disabled={currentPage === totalPages}
+          >
+            Próximo
+          </button>
+        </div>
       </div>
     </main>
   );
