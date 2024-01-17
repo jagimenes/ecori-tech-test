@@ -7,11 +7,19 @@ import {
 } from 'react-icons/fa';
 import { toast } from 'react-toastify';
 
-export default function Tasks({ task, setTasks, onGetTask, onEditTask }) {
+export default function Tasks({
+  task,
+  setTasks,
+  onGetTask,
+  onEditTask,
+  onLoadingTasks,
+}) {
   const { id, title, description, completed_at } = task;
 
   const updateCheckTask = async (taskId, taskCheck) => {
     try {
+      onLoadingTasks(true);
+
       const res = await customFetch.patch(`/tasks/${taskId}`, {
         completed_at: taskCheck,
       });
@@ -28,11 +36,15 @@ export default function Tasks({ task, setTasks, onGetTask, onEditTask }) {
       }
     } catch (error) {
       console.error(error);
+    } finally {
+      onLoadingTasks(false);
     }
   };
 
   const deleteTask = async (taskId) => {
     try {
+      onLoadingTasks(true);
+
       const res = await customFetch.delete(`/tasks/${taskId}`);
       if (res.status === 204) {
         setTasks((currentTasks) => {
@@ -43,6 +55,8 @@ export default function Tasks({ task, setTasks, onGetTask, onEditTask }) {
       }
     } catch (error) {
       console.error(error);
+    } finally {
+      onLoadingTasks(false);
     }
   };
 

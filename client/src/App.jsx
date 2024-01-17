@@ -14,9 +14,12 @@ export default function App() {
   const [totalCount, setTotalCount] = useState(0);
   const [searchTitle, setSearchTitle] = useState('');
   const [searchDescription, setSearchDescription] = useState('');
+  const [loadingTasks, setLoadingTasks] = useState(false);
 
   const getTasks = useCallback(async () => {
     try {
+      setLoadingTasks(true);
+
       const res = await customFetch(
         `/tasks?page=${currentPage}&title=${searchTitle}&description=${searchDescription}`
       );
@@ -29,6 +32,8 @@ export default function App() {
       }
     } catch (error) {
       console.error(error);
+    } finally {
+      setLoadingTasks(false);
     }
   }, [currentPage, searchTitle, searchDescription]);
 
@@ -39,6 +44,8 @@ export default function App() {
   const createNewTask = async (e) => {
     e.preventDefault();
     try {
+      setLoadingTasks(true);
+
       const res = await customFetch.post('/tasks', {
         title,
         description,
@@ -53,12 +60,15 @@ export default function App() {
       }
     } catch (error) {
       console.error(error);
+    } finally {
+      setLoadingTasks(false);
     }
   };
 
   const updateTask = async (e) => {
     e.preventDefault();
     try {
+      setLoadingTasks(true);
       const res = await customFetch.put(`/tasks/${editTask.id}`, {
         title,
         description,
@@ -74,6 +84,8 @@ export default function App() {
       }
     } catch (error) {
       console.error(error);
+    } finally {
+      setLoadingTasks(false);
     }
   };
 
@@ -109,6 +121,7 @@ export default function App() {
           </button>
         </form>
       </div>
+
       <div className='form__container-search'>
         <form className='form'>
           <input
@@ -127,8 +140,11 @@ export default function App() {
           />
         </form>
       </div>
+
       <div className='tasks'>
-        {tasks.length > 0 &&
+        {loadingTasks && <p>Loading...</p>}
+        {!loadingTasks &&
+          tasks.length > 0 &&
           tasks.map((task) => (
             <Tasks
               key={task.id}
@@ -136,30 +152,33 @@ export default function App() {
               setTasks={setTasks}
               onGetTask={getTasks}
               onEditTask={editingTask}
+              onLoadingTasks={setLoadingTasks}
             />
           ))}
-
-        <div className='pagination'>
-          <button
-            onClick={() =>
-              setCurrentPage((prevPage) => Math.max(prevPage - 1, 1))
-            }
-            disabled={currentPage === 1}
-          >
-            Anterior
-          </button>
-          <span>
-            Página {currentPage} de {totalPages}, Total de Tarefas: {totalCount}
-          </span>
-          <button
-            onClick={() =>
-              setCurrentPage((prevPage) => Math.min(prevPage + 1, totalPages))
-            }
-            disabled={currentPage === totalPages}
-          >
-            Próximo
-          </button>
-        </div>
+        {!loadingTasks && (
+          <div className='pagination'>
+            <button
+              onClick={() =>
+                setCurrentPage((prevPage) => Math.max(prevPage - 1, 1))
+              }
+              disabled={currentPage === 1}
+            >
+              Anterior
+            </button>
+            <span>
+              Página {currentPage} de {totalPages}, Total de Tarefas:{' '}
+              {totalCount}
+            </span>
+            <button
+              onClick={() =>
+                setCurrentPage((prevPage) => Math.min(prevPage + 1, totalPages))
+              }
+              disabled={currentPage === totalPages}
+            >
+              Próximo
+            </button>
+          </div>
+        )}
       </div>
     </main>
   );
