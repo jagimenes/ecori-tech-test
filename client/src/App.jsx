@@ -1,6 +1,4 @@
-/* eslint-disable react-hooks/exhaustive-deps */
-/* eslint-disable no-unused-vars */
-import { useEffect, useState } from 'react';
+import { useCallback, useEffect, useState } from 'react';
 import customFetch from './utils/customFetch';
 import Tasks from './Tasks';
 
@@ -12,10 +10,14 @@ export default function App() {
   const [currentPage, setCurrentPage] = useState(1);
   const [totalPages, setTotalPages] = useState(1);
   const [totalCount, setTotalCount] = useState(0);
+  const [searchTitle, setSearchTitle] = useState('');
+  const [searchDescription, setSearchDescription] = useState('');
 
-  const getTasks = async (page = 1) => {
+  const getTasks = useCallback(async () => {
     try {
-      const res = await customFetch(`/tasks?page=${currentPage}`);
+      const res = await customFetch(
+        `/tasks?page=${currentPage}&title=${searchTitle}&description=${searchDescription}`
+      );
       const { tasks, totalPages, totalCount } = res.data;
       console.log(tasks, totalPages, totalCount);
       setTasks(tasks);
@@ -24,11 +26,11 @@ export default function App() {
     } catch (error) {
       console.error(error);
     }
-  };
+  }, [currentPage, searchTitle, searchDescription]);
 
   useEffect(() => {
     getTasks();
-  }, [currentPage]);
+  }, [getTasks, currentPage, searchTitle, searchDescription]);
 
   const createNewTask = async (e) => {
     e.preventDefault();
@@ -80,7 +82,7 @@ export default function App() {
             type='text'
             value={title}
             onChange={(e) => setTitle(e.target.value)}
-            placeholder='Title...'
+            placeholder='Título...'
             className='form__input'
             required
           />
@@ -88,7 +90,7 @@ export default function App() {
             type='text'
             value={description}
             onChange={(e) => setDescription(e.target.value)}
-            placeholder='Description...'
+            placeholder='Descrição...'
             className='form__input'
             required
           />
@@ -97,29 +99,24 @@ export default function App() {
           </button>
         </form>
       </div>
-      {/* <div className='form__container-search'>
-        <form className='form' onSubmit={createNewTask}>
+      <div className='form__container-search'>
+        <form className='form'>
           <input
             type='text'
-            value={content}
-            onChange={(e) => setContent(e.target.value)}
-            placeholder='Title...'
+            value={searchTitle}
+            onChange={(e) => setSearchTitle(e.target.value)}
+            placeholder='Pesquisar por título...'
             className='form__input'
-            required
           />
           <input
             type='text'
-            value={content}
-            onChange={(e) => setContent(e.target.value)}
-            placeholder='Description...'
+            value={searchDescription}
+            onChange={(e) => setSearchDescription(e.target.value)}
+            placeholder='Pesquisar por descrição...'
             className='form__input'
-            required
           />
-          <button className='form__button' type='submit'>
-            Search
-          </button>
         </form>
-      </div> */}
+      </div>
       <div className='tasks'>
         {tasks.length > 0 &&
           tasks.map((task) => (
