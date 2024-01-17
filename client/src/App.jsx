@@ -1,6 +1,8 @@
 import { useCallback, useEffect, useState } from 'react';
 import customFetch from './utils/customFetch';
-import Tasks from './Tasks';
+import { toast } from 'react-toastify';
+
+import Tasks from './components/Tasks';
 
 export default function App() {
   const [tasks, setTasks] = useState([]);
@@ -19,10 +21,12 @@ export default function App() {
         `/tasks?page=${currentPage}&title=${searchTitle}&description=${searchDescription}`
       );
       const { tasks, totalPages, totalCount } = res.data;
-      console.log(tasks, totalPages, totalCount);
-      setTasks(tasks);
-      setTotalPages(totalPages);
-      setTotalCount(totalCount);
+
+      if (res.status === 200) {
+        setTasks(tasks);
+        setTotalPages(totalPages);
+        setTotalCount(totalCount);
+      }
     } catch (error) {
       console.error(error);
     }
@@ -35,17 +39,21 @@ export default function App() {
   const createNewTask = async (e) => {
     e.preventDefault();
     try {
-      await customFetch.post('/tasks', {
+      const res = await customFetch.post('/tasks', {
         title,
         description,
         completed_at: false,
       });
+
+      if (res.status === 201) {
+        setTitle('');
+        setDescription('');
+        getTasks();
+        toast.success('Tarefa criada com sucesso!');
+      }
     } catch (error) {
       console.error(error);
     }
-    setTitle('');
-    setDescription('');
-    getTasks();
   };
 
   const updateTask = async (e) => {
@@ -56,11 +64,13 @@ export default function App() {
         description,
         completed_at: editTask.completed_at,
       });
+
       if (res.status === 200) {
         setTitle('');
         setDescription('');
         setEditTask(null);
         getTasks();
+        toast.success('Tarefa editada com sucesso!');
       }
     } catch (error) {
       console.error(error);

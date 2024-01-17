@@ -76,6 +76,9 @@
  .task__content p {
    font-size: 1rem;
    margin-top: 1rem;
+   border: 1px solid #7dd3fc;
+   padding: 1rem;
+   border-radius: 10px;
  }
 
  .task__content-btn {
