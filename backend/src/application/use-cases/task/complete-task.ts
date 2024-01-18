@@ -2,25 +2,19 @@ import { Task } from "../../../domain/entities/task";
 import { AppError } from "../../../domain/exception/app-error";
 import TaskRepository from "../../../domain/interfaces/repositories/task-repository";
 
-export type UpdateTaskInput = {
-  id: string;
-  title: string;
-  description: string;
-};
-
-export class UpdateTask {
+export class CompleteTask {
   constructor(private readonly taskRepository: TaskRepository) {}
 
-  execute = async ({ id, title, description }: UpdateTaskInput) => {
+  execute = async (id: string) => {
     const result = await this.taskRepository.findById(id);
 
     if (!result) throw new AppError("task not found");
 
+    const currentDate = new Date();
     const task = Task.create({
       ...result,
-      title,
-      description,
-      updated_at: new Date(),
+      completed_at: currentDate,
+      updated_at: currentDate,
     });
 
     const output = await this.taskRepository.update(task);

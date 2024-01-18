@@ -1,14 +1,43 @@
 import { NextFunction, Request, Response } from "express";
-import CreateTask from "../use-cases/task/create-task";
-import UpdateTask from "../use-cases/task/update-task";
-import DeleteTask from "../use-cases/task/delete-task";
+import {
+  CompleteTask,
+  CreateTask,
+  DeleteTask,
+  ListTask,
+  ListTaskInput,
+  UpdateTask,
+} from "../use-cases/task";
 
 export default class TaskController {
   constructor(
     private readonly createTask: CreateTask,
     private readonly updateTask: UpdateTask,
-    private readonly deleteTask: DeleteTask
+    private readonly deleteTask: DeleteTask,
+    private readonly listTask: ListTask,
+    private readonly completeTask: CompleteTask
   ) {}
+
+  list = async (req: Request, res: Response, next: NextFunction) => {
+    try {
+      const { title, description, page, size } = req.query;
+
+      const listTaskInput: ListTaskInput = {
+        searchFields: {
+          description: description?.toString() ?? undefined,
+          title: title?.toString() ?? undefined,
+        },
+        pagination: {
+          page: !!page ? Number(page) : undefined,
+          size: !!size ? Number(size) : undefined,
+        },
+      };
+
+      const result = await this.listTask.execute(listTaskInput);
+      res.status(200).json(result);
+    } catch (error) {
+      next(error);
+    }
+  };
 
   create = async (req: Request, res: Response, next: NextFunction) => {
     try {
@@ -44,6 +73,20 @@ export default class TaskController {
       await this.deleteTask.execute(id);
 
       res.status(200).send();
+    } catch (error) {
+      next(error);
+    }
+  };
+
+  complete = async (req: Request, res: Response, next: NextFunction) => {
+    try {
+      const { id } = req.params;
+
+      if (!id) throw new Error("id is null or undefined");
+
+      const result = await this.completeTask.execute(id);
+
+      res.status(200).json(result);
     } catch (error) {
       next(error);
     }

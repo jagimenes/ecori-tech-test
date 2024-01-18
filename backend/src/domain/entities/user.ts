@@ -1,11 +1,13 @@
 import generateUUID from "../../lib/uuid/identifier-generator";
+import hash from "../../lib/bcrypt/hash";
+import { AppError } from "../exception/app-error";
 
 export class User {
   id: string;
   username: string;
   email: string;
-  password: string;
-  created_at: Date;
+  password?: string;
+  created_at?: Date;
   updated_at?: Date | null;
 
   private constructor({
@@ -24,14 +26,27 @@ export class User {
     this.updated_at = updated_at;
   }
 
-  static create({
+  static async create({
     id,
     username,
     email,
     password,
     created_at,
     updated_at,
-  }): Partial<User> {
+  }: Partial<User>) {
+    if (username === undefined) throw new AppError("username is not defined");
+    if (username === null) throw new AppError("username is null");
+
+    if (email === undefined) throw new AppError("email is not defined");
+    if (email === null) throw new AppError("email is null");
+
+    if (!!id === false && password === undefined)
+      throw new AppError("password is not defined");
+
+    if (password !== undefined) {
+      password = await hash(password);
+    }
+
     return new User({
       id: id ?? generateUUID(),
       username,
