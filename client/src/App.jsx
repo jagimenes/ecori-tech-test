@@ -2,7 +2,9 @@ import { useCallback, useEffect, useState } from 'react';
 import customFetch from './utils/customFetch';
 import { toast } from 'react-toastify';
 
-import Tasks from './components/Tasks';
+import ListTasks from './components/ListTasks';
+import InputTasks from './components/InputTasks';
+import PaginationTasks from './components/PaginationTasks';
 
 export default function App() {
   const [tasks, setTasks] = useState([]);
@@ -19,12 +21,10 @@ export default function App() {
   const getTasks = useCallback(async () => {
     try {
       setLoadingTasks(true);
-
       const res = await customFetch(
         `/tasks?page=${currentPage}&title=${searchTitle}&description=${searchDescription}`
       );
       const { tasks, totalPages, totalCount } = res.data;
-
       if (res.status === 200) {
         setTasks(tasks);
         setTotalPages(totalPages);
@@ -45,13 +45,11 @@ export default function App() {
     e.preventDefault();
     try {
       setLoadingTasks(true);
-
       const res = await customFetch.post('/tasks', {
         title,
         description,
         completed_at: false,
       });
-
       if (res.status === 201) {
         setTitle('');
         setDescription('');
@@ -74,7 +72,6 @@ export default function App() {
         description,
         completed_at: editTask.completed_at,
       });
-
       if (res.status === 200) {
         setTitle('');
         setDescription('');
@@ -100,7 +97,7 @@ export default function App() {
       <h1 className='title'>To Do List</h1>
       <div className='form__container'>
         <form className='form' onSubmit={editTask ? updateTask : createNewTask}>
-          <input
+          <InputTasks
             type='text'
             value={title}
             onChange={(e) => setTitle(e.target.value)}
@@ -108,7 +105,7 @@ export default function App() {
             className='form__input'
             required
           />
-          <input
+          <InputTasks
             type='text'
             value={description}
             onChange={(e) => setDescription(e.target.value)}
@@ -121,17 +118,16 @@ export default function App() {
           </button>
         </form>
       </div>
-
       <div className='form__container-search'>
         <form className='form'>
-          <input
+          <InputTasks
             type='text'
             value={searchTitle}
             onChange={(e) => setSearchTitle(e.target.value)}
             placeholder='Pesquisar por título...'
             className='form__input'
           />
-          <input
+          <InputTasks
             type='text'
             value={searchDescription}
             onChange={(e) => setSearchDescription(e.target.value)}
@@ -140,13 +136,12 @@ export default function App() {
           />
         </form>
       </div>
-
       <div className='tasks'>
         {loadingTasks && <p>Loading...</p>}
         {!loadingTasks &&
           tasks.length > 0 &&
           tasks.map((task) => (
-            <Tasks
+            <ListTasks
               key={task.id}
               task={task}
               setTasks={setTasks}
@@ -156,28 +151,12 @@ export default function App() {
             />
           ))}
         {!loadingTasks && (
-          <div className='pagination'>
-            <button
-              onClick={() =>
-                setCurrentPage((prevPage) => Math.max(prevPage - 1, 1))
-              }
-              disabled={currentPage === 1}
-            >
-              Anterior
-            </button>
-            <span>
-              Página {currentPage} de {totalPages}, Total de Tarefas:{' '}
-              {totalCount}
-            </span>
-            <button
-              onClick={() =>
-                setCurrentPage((prevPage) => Math.min(prevPage + 1, totalPages))
-              }
-              disabled={currentPage === totalPages}
-            >
-              Próximo
-            </button>
-          </div>
+          <PaginationTasks
+            currentPage={currentPage}
+            totalPages={totalPages}
+            totalCount={totalCount}
+            setCurrentPage={setCurrentPage}
+          />
         )}
       </div>
     </main>

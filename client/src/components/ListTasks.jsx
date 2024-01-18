@@ -7,7 +7,7 @@ import {
 } from 'react-icons/fa';
 import { toast } from 'react-toastify';
 
-export default function Tasks({
+export default function ListTasks({
   task,
   setTasks,
   onGetTask,
