@@ -14,25 +14,17 @@ export function makeCreateTask(repository: TaskRepository): CreateTask {
 }
 
 export function makeUpdateTask(repository: TaskRepository): UpdateTask {
-  const taskRepository = repository;
-  const updateTask = new UpdateTask(taskRepository);
-  return updateTask;
+  return new UpdateTask(repository);
 }
 
 export function makeDeleteTask(repository: TaskRepository): DeleteTask {
-  const taskRepository = repository;
-  const deleteTask = new DeleteTask(taskRepository);
-  return deleteTask;
+  return new DeleteTask(repository);
 }
 
 export function makeListTask(repository: TaskRepository): ListTask {
-  const taskRepository = repository;
-  const listTask = new ListTask(taskRepository);
-  return listTask;
+  return new ListTask(repository);
 }
 
 export function makeCompleteTask(repository: TaskRepository): CompleteTask {
-  const taskRepository = repository;
-  const completeTask = new CompleteTask(taskRepository);
-  return completeTask;
+  return new CompleteTask(repository);
 }

@@ -4,11 +4,13 @@ import app from "../../../../src/app";
 import { makeCreateTask } from "../../../../src/application/factories/task";
 import PgTaskRepository from "../../../../src/infra/pg/repositories/pg-task-repository";
 import { Task } from "../../../../src/domain/entities/task";
+import { TestUtil } from "../../../../vitest.integration.setup";
 
 describe("task controller tests", async () => {
   it("should create a task", async () => {
     const response = await request(app)
       .post("/tasks")
+      .set("Authorization", TestUtil.token)
       .set("content-type", "application/json")
       .send({
         description: "Some description",
@@ -31,6 +33,7 @@ describe("task controller tests", async () => {
 
     const response = await request(app)
       .put(`/tasks/${task.id}`)
+      .set("Authorization", TestUtil.token)
       .set("content-type", "application/json")
       .send(task);
 
@@ -47,7 +50,10 @@ describe("task controller tests", async () => {
       description: "some description",
     });
 
-    const response = await request(app).delete(`/tasks/${task.id}`).send();
+    const response = await request(app)
+      .delete(`/tasks/${task.id}`)
+      .set("Authorization", TestUtil.token)
+      .send();
 
     expect(response.statusCode).toBe(200);
   });
@@ -62,7 +68,10 @@ describe("task controller tests", async () => {
       });
     }
 
-    const response = await request(app).get(`/tasks?page=0&size=10`).send();
+    const response = await request(app)
+      .get(`/tasks?page=0&size=10`)
+      .set("Authorization", TestUtil.token)
+      .send();
 
     expect(response.statusCode).toBe(200);
     expect((response.body as Task[]).length).toBe(10);
@@ -78,7 +87,10 @@ describe("task controller tests", async () => {
       });
     }
 
-    const response = await request(app).get(`/tasks?page=1&size=10`).send();
+    const response = await request(app)
+      .get(`/tasks?page=1&size=10`)
+      .set("Authorization", TestUtil.token)
+      .send();
 
     expect(response.statusCode).toBe(200);
     expect((response.body as Task[]).length).toBe(1);
@@ -96,6 +108,7 @@ describe("task controller tests", async () => {
 
     const response = await request(app)
       .get(`/tasks?title=some%20title%208`)
+      .set("Authorization", TestUtil.token)
       .send();
 
     expect(response.statusCode).toBe(200);
@@ -114,6 +127,7 @@ describe("task controller tests", async () => {
 
     const response = await request(app)
       .get(`/tasks?description=some%20description%208`)
+      .set("Authorization", TestUtil.token)
       .send();
 
     expect(response.statusCode).toBe(200);
@@ -132,6 +146,7 @@ describe("task controller tests", async () => {
 
     const response = await request(app)
       .get(`/tasks?description=some%20description%208&title=some%20title%208`)
+      .set("Authorization", TestUtil.token)
       .send();
 
     expect(response.statusCode).toBe(200);
@@ -150,6 +165,7 @@ describe("task controller tests", async () => {
 
     const response = await request(app)
       .get(`/tasks?description=some%20description%208&title=some%20title%209`)
+      .set("Authorization", TestUtil.token)
       .send();
 
     expect(response.statusCode).toBe(200);
@@ -165,7 +181,10 @@ describe("task controller tests", async () => {
       description: `some description`,
     });
 
-    const response = await request(app).patch(`/tasks/${task.id}`).send();
+    const response = await request(app)
+      .patch(`/tasks/${task.id}`)
+      .set("Authorization", TestUtil.token)
+      .send();
 
     const completedTask = await taskRepository.findById(task.id);
 

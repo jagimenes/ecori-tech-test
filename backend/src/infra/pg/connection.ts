@@ -1,5 +1,5 @@
-import { Pool } from "pg";
-
+import pg from "pg";
+const { Pool } = pg;
 const { DB_USERNAME, DB_PASSWORD, DB_HOST, DB_NAME } = process.env;
 
 const connectionPool = new Pool({

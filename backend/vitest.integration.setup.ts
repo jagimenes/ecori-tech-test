@@ -2,9 +2,12 @@ import { beforeEach } from "vitest";
 import pg from "pg";
 import fs from "fs";
 import dotenv from "dotenv";
+import jwt from "jsonwebtoken";
+import { randomUUID } from "crypto";
+
 dotenv.config();
 
-const { DB_USERNAME, DB_PASSWORD, DB_HOST, DB_NAME } = process.env;
+const { DB_USERNAME, DB_PASSWORD, DB_HOST, DB_NAME, SECRET } = process.env;
 const { Client } = pg;
 
 const dbTestName = `${DB_NAME}_test`;
@@ -37,10 +40,32 @@ beforeEach(async () => {
 
   try {
     await pgClient.connect();
-    const query = `TRUNCATE TABLE tasks CASCADE;`;
-    await pgClient.query(query);
+    const queries: string[] = [];
+    queries.push(`TRUNCATE TABLE tasks CASCADE;`);
+    queries.push(`TRUNCATE TABLE users CASCADE;`);
+
+    for (let i = 0; i < queries.length; i++) {
+      const query = queries[i];
+      await pgClient.query(query);
+    }
+
+    const id = randomUUID();
+
+    const result = await pgClient.query(
+      "insert into users (id, username, email, password) values ($1, $2, $3, $4) returning id, username, email, created_at, updated_at",
+      [id, "test user", "test@test.com", "123456"]
+    );
+
+    const token = jwt.sign({ id }, SECRET as string);
+
     pgClient.end();
+
+    TestUtil.token = `Bearer ${token}`;
   } catch (error) {
     console.log(error);
   }
 });
+
+export class TestUtil {
+  static token = "";
+}

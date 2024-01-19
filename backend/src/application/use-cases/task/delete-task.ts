@@ -1,4 +1,4 @@
-import { AppError } from "../../../domain/exception/app-error";
+import { AppError } from "../../exception/app-error";
 import TaskRepository from "../../../domain/interfaces/repositories/task-repository";
 
 export class DeleteTask {

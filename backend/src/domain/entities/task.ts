@@ -1,5 +1,5 @@
 import generateUUID from "../../lib/uuid/identifier-generator.js";
-import { AppError } from "../exception/app-error.js";
+import { AppError } from "../../application/exception/app-error.js";
 
 export class Task {
   id: string;

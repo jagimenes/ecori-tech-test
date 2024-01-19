@@ -8,6 +8,11 @@ import {
   makeListTask,
   makeUpdateTask,
 } from "../factories/task";
+import authenticationHandler from "../middlewares/authentication-handler";
+import ImportTaskController from "../controllers/import-task-controller";
+import multer from "multer";
+
+const upload = multer({ dest: "uploads/" });
 
 const taskRouter = Router();
 
@@ -27,10 +32,19 @@ const taskController = new TaskController(
   completeTask
 );
 
+const importTaskController = new ImportTaskController(createTask);
+
+taskRouter.use(authenticationHandler);
+
 taskRouter.post("/", taskController.create);
 taskRouter.put("/:id", taskController.update);
 taskRouter.delete("/:id", taskController.delete);
 taskRouter.get("/", taskController.list);
 taskRouter.patch("/:id", taskController.complete);
+taskRouter.post(
+  "/csvImport",
+  upload.single("csvFile"),
+  importTaskController.create
+);
 
 export default taskRouter;

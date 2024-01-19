@@ -1,5 +1,6 @@
 import { NextFunction, Request, Response } from "express";
-import { AppError } from "../../domain/exception/app-error";
+import { AppError } from "../exception/app-error";
+import { NotAuthenticatedError } from "../exception/not-authenticated-error";
 
 const errorHandler = (
   err: Error,
@@ -10,6 +11,10 @@ const errorHandler = (
   let status = 500;
   if (err instanceof AppError) {
     status = 400;
+  }
+
+  if (err instanceof NotAuthenticatedError) {
+    status = 401;
   }
 
   const errMsg = err.message || "Something went wrong";

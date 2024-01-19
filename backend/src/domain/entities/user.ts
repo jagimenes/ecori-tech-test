@@ -1,6 +1,6 @@
 import generateUUID from "../../lib/uuid/identifier-generator";
-import hash from "../../lib/bcrypt/hash";
-import { AppError } from "../exception/app-error";
+import { hash } from "../../lib/bcrypt/hash";
+import { AppError } from "../../application/exception/app-error";
 
 export class User {
   id: string;
