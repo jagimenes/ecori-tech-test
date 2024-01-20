@@ -85,14 +85,29 @@ export default class PgTaskRepository implements TaskRepository {
   }: Task): Promise<Task> {
     const client = await connectionPool.connect();
 
-    const result = await client.query<Task>(
-      "update tasks set title = $1, description = $2, completed_at = $4, updated_at = $5 where id = $3 returning *",
-      [title, description, id, completed_at, updated_at]
-    );
+    let task: Task | undefined = undefined;
+    try {
+      await client.query("BEGIN");
+      let _ = await client.query<Task>(
+        "select * from tasks where id = $1 for update",
+        [id]
+      );
 
-    client.release();
+      const result = await client.query<Task>(
+        "update tasks set title = $1, description = $2, completed_at = $4, updated_at = $5 where id = $3 returning *",
+        [title, description, id, completed_at, updated_at]
+      );
 
-    return result.rows[0];
+      await client.query("COMMIT");
+      task = result.rows[0];
+    } catch (error) {
+      await client.query("ROLLBACK");
+      throw error;
+    } finally {
+      client.release();
+    }
+
+    return task;
   }
 
   async create({ id, title, description }: CreateTaskInput): Promise<Task> {

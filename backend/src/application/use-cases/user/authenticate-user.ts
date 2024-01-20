@@ -29,6 +29,11 @@ export default class AuthenticateUser {
 
     return {
       token,
+      user: {
+        id: user.id,
+        username: user.username,
+        email: user.email,
+      },
     };
   }
 }
