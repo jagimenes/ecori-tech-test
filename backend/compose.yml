@@ -1,0 +1,13 @@
+version: '3.5'
+services:
+  db: # Banco de dados
+   container_name: postgres-ecori
+   image: postgres
+   ports:
+    - 5432:5432
+   environment:
+     POSTGRES_USER: ecori
+     POSTGRES_PASSWORD: ecori
+     POSTGRES_DB: ecoridb
+   volumes:
+     - ./db.sql:/docker-entrypoint-initdb.d/db.sql
