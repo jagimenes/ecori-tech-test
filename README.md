@@ -22,7 +22,11 @@ git clone https://github.com/joaopaulosf/ecori-tech-test.git
 cd ecori-tech-test/server
 ```
 
-3. Install the project dependencies using npm:
+3. **Crie arquivo .env:**
+
+exemplo: [example.env](https://github.com/joaopaulosf/ecori-tech-test/blob/main/server/example.env)
+
+4. Instale as dependências do projeto usando o npm:
 
 ```sh
 npm install
@@ -55,7 +59,7 @@ npm run preview
 cd ecori-tech-test/client
 ```
 
-2. Install the project dependencies using npm:
+2. Instale as dependências do projeto usando o npm:
 
 ```sh
 npm install
@@ -72,8 +76,6 @@ npm run build
 
 ## Running the Server
 
-To run the development server and start working on the DIY Store project, use the following command:
-
 ```sh
 npm run preview
 ```
@@ -83,3 +85,42 @@ npm run preview
 `➜  Local:   http://127.0.0.1:4173/` <br>
 `➜ Network: use --host to expose` <br>
 `➜ press h + enter to show help`
+
+# Endpois
+
+`GET` **/tasks**
+
+- Retorna todas as tarefas.
+
+`GET` **/tasks/?pageSize=5&page=1**
+
+- Retorna uma página específica de tarefas com tamanho de página personalizado.
+- O tamanho padrão da página é 10 se não especificado.
+
+`GET` **/tasks/?title=example&description=example&pageSize=2&page=1**
+
+- Retorna tarefas com um título e descrição específicos e permite a paginação personalizada.
+
+`POST` **/tasks**
+
+- Cria uma nova tarefa.
+
+`POST` **/upload?csv**
+
+- Faz o upload de um arquivo CSV para processamento.
+
+`PUT` **/tasks/:id**
+
+- Atualiza uma tarefa com o ID especificado.
+
+`PATCH` **/tasks/:id**
+
+- Atualiza parcialmente uma tarefa com o ID especificado.
+
+`DELETE` **/tasks/:id**
+
+- Remove uma tarefa com o ID especificado.
+
+`PUT` **/task/:id**
+
+- Marca uma tarefa como concluída com o ID especificado.
