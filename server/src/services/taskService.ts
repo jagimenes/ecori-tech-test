@@ -1,4 +1,4 @@
-import pool from "../db/index";
+import pool from "../model/index";
 
 interface TaskPayload {
   taskId?: string;
@@ -28,6 +28,21 @@ class TaskService {
 
     try {
       const result = await client.query(queryText, queryValues);
+      return result.rows;
+    } finally {
+      client.release();
+    }
+  }
+
+  async getTaskById(taskId: string) {
+    const client = await pool.connect();
+
+    const queryText = "SELECT * FROM tasks WHERE id = $1";
+    const queryValue = [taskId];
+
+    try {
+      const result = await client.query(queryText, queryValue);
+
       return result.rows;
     } finally {
       client.release();
