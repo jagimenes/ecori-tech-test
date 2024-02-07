@@ -1,6 +1,23 @@
 import pool from "./index";
 
 class TaskModel {
+  async checkAndCreateDatabase() {
+    const client = await pool.connect();
+
+    try {
+      const queryText =
+        "SELECT datname FROM pg_database WHERE datname = 'postgres'";
+      const { rows } = await pool.query(queryText);
+
+      if (rows.length === 0) {
+        const createDatabaseQuery = "CREATE DATABASE postgres";
+        await client.query(createDatabaseQuery);
+      }
+    } catch (error) {
+      console.error(error);
+    }
+  }
+
   async tableExists() {
     const client = await pool.connect();
     const queryText = `
@@ -14,7 +31,8 @@ class TaskModel {
     try {
       const result = await client.query(queryText);
 
-      return result;
+      const exists = result.rows[0].exists;
+      return exists;
     } catch (err) {
       console.error(err);
     } finally {
@@ -33,8 +51,9 @@ class TaskModel {
 
     try {
       const result = await client.query(queryText);
+      const exists = result.rows[0].exists;
 
-      return result;
+      return exists;
     } catch (err) {
       console.error(err);
     } finally {
@@ -53,8 +72,9 @@ class TaskModel {
 
     try {
       const result = await client.query(queryText);
+      const exists = result.rows[0].exists;
 
-      return result;
+      return exists;
     } catch (err) {
       console.error(err);
     } finally {

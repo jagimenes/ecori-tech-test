@@ -10,6 +10,8 @@ app.listen(PORT, async () => {
     const functionExists = await TaskModel.functionExists();
     const triggerExists = await TaskModel.triggerExists();
 
+    TaskModel.checkAndCreateDatabase();
+
     if (!tableExists) {
       await TaskModel.createNewTable();
       console.log("CREATE TABLE");

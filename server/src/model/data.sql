@@ -1,4 +1,5 @@
-CREATE DATABASE tasksdb;
+-- created by default by postgres
+CREATE DATABASE postgres;
 
 -- tables
 CREATE TABLE tasks(
