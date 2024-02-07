@@ -1,4 +1,6 @@
 import pool from "../model/index";
+import * as fs from "fs";
+import csvParser from "csv-parser";
 
 interface TaskPayload {
   taskId?: string;
@@ -160,6 +162,42 @@ class TaskService {
     } finally {
       client.release();
     }
+  }
+
+  async taskUpload(filePath: string) {
+    const client = await pool.connect();
+    const result: any[] = [];
+
+    return new Promise<void>((resolve, reject) => {
+      fs.createReadStream(filePath)
+        .pipe(csvParser())
+        .on("data", (row) => {
+          result.push(row);
+        })
+        .on("end", async () => {
+          const queryText =
+            'INSERT INTO "tasks" (title, description) VALUES($1, $2)';
+
+          try {
+            await Promise.all(
+              result.map(async (row: any) => {
+                const { title, description } = row;
+
+                if (title !== null || description !== null) {
+                  const values = [title, description];
+                  await client.query(queryText, values);
+                }
+              })
+            );
+
+            resolve();
+          } catch (error) {
+            throw error;
+          } finally {
+            client.release();
+          }
+        });
+    });
   }
 }
 
