@@ -14,6 +14,9 @@ const Navbar = () => {
           <Link to={"/"}>Home</Link>
         </li>
         <li>
+          <Link to={"/upload"}>Upload CSV</Link>
+        </li>
+        <li>
           <Link to={"/new"} className="new-btn">
             New Task
           </Link>
