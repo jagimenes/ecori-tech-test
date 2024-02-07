@@ -1,6 +1,4 @@
 import { Request, Response } from "express";
-import pool from "../db/index";
-import { PoolClient, QueryResult } from "pg";
 import taskService from "../services/taskService";
 
 class tasksController {
@@ -29,6 +27,22 @@ class tasksController {
       res.status(400).json({
         message:
           "Error when searching for tasks. Please check the parameters sent.",
+      });
+    }
+  }
+
+  async getTaskById(req: Request, res: Response) {
+    try {
+      const taskId = req.params.id;
+
+      const task = await taskService.getTaskById(taskId);
+
+      res.status(200).json(task);
+    } catch (error) {
+      console.error(error);
+      res.status(400).json({
+        message:
+          "Error when searching for task. Please check the parameter sent.",
       });
     }
   }
