@@ -11,14 +11,18 @@ const NewTask = () => {
   const [description, setDescription] = useState();
 
   const newTask = async (e) => {
-    e.preventDefault();
+    try {
+      e.preventDefault();
 
-    await taskFetch.post("/tasks", {
-      title,
-      description,
-    });
+      await taskFetch.post("/tasks", {
+        title,
+        description,
+      });
 
-    navigate("/");
+      navigate("/");
+    } catch (err) {
+      console.error(err);
+    }
   };
 
   return (
