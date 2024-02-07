@@ -1,35 +1,85 @@
-[![pt-br](https://img.shields.io/badge/lang-pt--br-green.svg)](https://github.com/jagimenes/ecori-tech-test/blob/main/README.pt-br.md)
+# Getting Started
 
-## Tech test to integrate the Ecori Team ☀
+## Prerequisites
 
-<br>
+Certifique-se de que tem as seguintes ferramentas instaladas no seu sistema:
 
-## Create a Rest API and a task management SPA. <br>
+`Node.js (v14 or later)`
+`NPM (Node Package Manager)`
+`PostgreSQL`
 
-## :computer: Functionalities (Back-end)
-🔴 A route of **tasks listing**, receiving parameters like filters (_title_ ou _description_) and pagination (_page_ e _pageSize_);<br>
-🔴 A route of **task creation**, receiving fields, _title_, _description_. The complete object, on database, should have more 3 fields: _completed_at_ (to control when the task is done), _created_at_ (to control when the task was created) and _updated_at_ (to control when the task was updated);<br>
-🔴 A route of **task update**, receiving by route params the task _id_, and receiving fields like _title_, _description_;<br>
-🔴 A route of **task removal**, receiving by route params the task _id_;<br>
-🔴 A route of **mark task as done**, receiving by route params the task _id_;<br>
-**Other suggestions**<br>
-🟢 **Bonus 1**: Importing tasks, with a list of _title_ and _description_, from a CSV file;<br>
-🟢 **Bonus 2**: Auth control with login;<br>
+# Instalação (server)
 
-## :computer: Functionalities (Front-end)
-🔴Implement all backend functionalities <br>
+1. Clone este repositório para o seu computador:
 
-## Technologies and tools you have to use:
-☑️ [Javascript](https://developer.mozilla.org/en-US/docs/Web/JavaScript) <br>
-☑️ [Node.js](https://nodejs.org/) <br>
-☑️ [React](https://react.dev/) <br>
-☑️ [PostgreSQL](https://www.postgresql.org/) <br>
-❗ It would be awesome, if you could provide us with an application with **tests** <br>
-❗ It would be awesome, if you implemented some treatment for concurrency in the data update routes <br>
+```sh
+git clone https://github.com/joaopaulosf/ecori-tech-test.git
+```
 
-## Start instructions
-- Create a fork of this project
-- Do all the tasks to complete the application
-- Create a README.md showing the steps to run the application
-- Make a merge request on the main branch
-- Send us the link of the merge request
+2. Mude o seu diretório atual para a pasta do projeto:
+
+```sh
+cd ecori-tech-test/server
+```
+
+3. Install the project dependencies using npm:
+
+```sh
+npm install
+
+```
+
+## Building the Project
+
+Para criar a aplicação do gestor de tarefas para produção, utilize o seguinte comando:
+
+```sh
+npm run build
+```
+
+## Running the Server
+
+```sh
+npm run preview
+```
+
+**Saída do terminal**:
+
+`Server running on port 3500`
+
+# Instalação (client)
+
+1. Mude o seu diretório atual para a pasta do projeto:
+
+```sh
+cd ecori-tech-test/client
+```
+
+2. Install the project dependencies using npm:
+
+```sh
+npm install
+
+```
+
+## Building the Project
+
+Para criar a aplicação do gestor de tarefas para produção, utilize o seguinte comando:
+
+```sh
+npm run build
+```
+
+## Running the Server
+
+To run the development server and start working on the DIY Store project, use the following command:
+
+```sh
+npm run preview
+```
+
+**Saída do terminal:**
+
+`➜  Local:   http://127.0.0.1:4173/` <br>
+`➜ Network: use --host to expose` <br>
+`➜ press h + enter to show help`
