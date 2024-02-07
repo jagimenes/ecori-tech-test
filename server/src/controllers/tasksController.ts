@@ -1,5 +1,6 @@
 import { Request, Response } from "express";
 import taskService from "../services/taskService";
+import pool from "../model";
 
 class tasksController {
   async getAllTasks(req: Request, res: Response) {
@@ -108,6 +109,21 @@ class tasksController {
       res.status(500).json({
         message: "Error to complete task.",
       });
+    }
+  }
+
+  async taskUpload(req: Request, res: Response) {
+    const client = await pool.connect();
+    const filePath: any = req.file?.path;
+
+    try {
+      await taskService.taskUpload(filePath);
+      res.status(200).json({ message: "CSV data upload successfully." });
+    } catch (err) {
+      console.error(err);
+      res.status(500).json({ message: "Error uploading CSV data." });
+    } finally {
+      client.release();
     }
   }
 }
