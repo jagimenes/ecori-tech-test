@@ -1,14 +1,29 @@
-const Modal = () => {
-  const mode = "edit"
-  const handleChange = () => {
-    console.log("change")
+import { useState } from 'react'
+
+const Modal = ( {mode, setShowModal, task }) => {
+  const editMode = mode === 'edit' ? true : false
+
+  const [data, setData] = useState({
+    user_email: editMode ? task.user_email : null,
+    title: editMode ? task.title : null,
+    description: editMode ? task.description : null,
+    date: editMode ? "" : new Date()
+  })
+
+  const handleChange = (e) => {
+    const { name, value } = e.target
+
+    setData(data => ({
+      ...data,
+      [name] : value
+    }))
   }
     return (
       <div className="overlay">
         <div className="modal">
           <div className="form-title-container">
             <h3>Let's {mode} a task</h3>
-            <button>X</button>
+            <button onClick={ () => setShowModal(false) }>X</button>
           </div>
 
           <form>
@@ -16,8 +31,8 @@ const Modal = () => {
               required
               maxLength={255}
               placeholder=" Name a new task"
-              name="task-title"
-              value={""}
+              name="title"
+              value={ data.title }
               onChange={handleChange}
             />
             <br/>
@@ -25,8 +40,8 @@ const Modal = () => {
               required
               maxLength={2550}
               placeholder=" Write the task description"
-              name="task-description"
-              value={""}
+              name="description"
+              value={ data.description }
               onChange={handleChange}/>
               
               <br/>

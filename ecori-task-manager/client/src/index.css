@@ -122,14 +122,12 @@ input {
     font-size: 13px;
 }
 
-.modal input[name="task-description"] {
+.modal input[name="description"] {
     resize: vertical;
     padding-bottom: 120px;
 }
 
-
 /* Modal Buttons*/
-
 .modal .form-title-container button {
     border: none;
     background-color: transparent;
@@ -151,6 +149,10 @@ input {
     color: #ffffff;
 }
 
+.modal .create:active {
+    background-color: #7eda93;
+    color: #ffffff;
+}
 
 
 
