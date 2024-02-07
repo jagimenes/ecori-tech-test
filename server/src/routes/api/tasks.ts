@@ -5,6 +5,7 @@ const router = Router();
 
 router
   .get("/", tasksController.getAllTasks)
+  .get("/:id", tasksController.getTaskById)
   .post("/", tasksController.createNewTask)
   .put("/:id", tasksController.updateTask)
   .patch("/:id", tasksController.updateTask)
