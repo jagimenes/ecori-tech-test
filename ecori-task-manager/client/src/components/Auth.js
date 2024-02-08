@@ -4,9 +4,9 @@ import { useCookies } from 'react-cookie'
 const Auth = () => {
   const [cookies, setCookie, removeCookie] = useCookies(null)
   const [isLogin, setIsLogIn] = useState(true)
-  const [email, setEmail] = useState(null)
-  const [password, setPassword] = useState(null)
-  const [confirmPassword, setConfirmPassword] = useState(null)
+  const [email, setEmail] = useState('')
+  const [password, setPassword] = useState('')
+  const [confirmPassword, setConfirmPassword] = useState('')
   const [error, setError] = useState(null)
 
   const viewLogin = (status) => {
@@ -26,7 +26,9 @@ const Auth = () => {
       headers: { 'Content-Type' : 'application/json'},
       body: JSON.stringify({ email, password })
     })
+
     const data = await response.json()
+    
     if(data.detail){
       setError(data.detail)
     } else{

@@ -12,7 +12,7 @@ const App = () => {
 
   const getData = async () => {
     try{
-      const response = await fetch(`http://localhost:8000/tasks/${userEmail}`)
+      const response = await fetch(`${process.env.REACT_APP_SERVERURL}/tasks/${userEmail}`)
       const json = await response.json()
       setTasks(json)
     }catch (err) {
@@ -32,6 +32,7 @@ const App = () => {
       {!authToken && <Auth/>}
       {authToken &&
       <> <ListHeader listName={'Ecori Task Manager'} getData={ getData }/>
+      <p className="user-email">Welcome, { userEmail }</p>
       {sortedTasks?.map((task) => <ListItem key={ task.id } task={ task } getData={ getData }/>)}
       </>}
     </div>

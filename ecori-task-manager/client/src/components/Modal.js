@@ -2,6 +2,7 @@ import { useState } from 'react'
 import { useCookies } from 'react-cookie'
 
 const Modal = ( {mode, setShowModal, getData, task }) => {
+
   const [cookies, setCookie, removeCookie] = useCookies(null)
   const editMode = mode === 'edit' ? true : false
 
@@ -16,7 +17,6 @@ const Modal = ( {mode, setShowModal, getData, task }) => {
   const postData = async (e) => {
     e.preventDefault()
     try {
-      console.log(process.env.REACT_APP_SERVER_URL)
       const response = await fetch(`${process.env.REACT_APP_SERVERURL}/tasks`, {
         method: "POST",
         headers: { 'Content-Type' : 'application/json' },

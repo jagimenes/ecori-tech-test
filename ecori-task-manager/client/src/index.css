@@ -24,6 +24,13 @@ input {
     border: 1.5px solid rgb(230, 232, 236);
 }
 
+.user-email {
+    float: right;
+    font-size: 13px;
+    margin: 10px;
+    color: #727290;
+}
+
 /* List Header */
 
 .list-header {
