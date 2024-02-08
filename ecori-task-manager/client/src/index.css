@@ -155,6 +155,12 @@ input {
     padding-bottom: 120px;
 }
 
+.update-date {
+    margin-left: 5px;
+    font-size: 10px;
+    color: #727290;
+}
+
 /* Modal Buttons*/
 .modal .form-title-container button {
     border: none;

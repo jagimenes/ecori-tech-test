@@ -56,6 +56,21 @@ const Modal = ( {mode, setShowModal, getData, task }) => {
       [name] : value
     }))
   }
+
+  const formatDate = (dateString) => {
+    const options = {
+      timeZone: 'America/Sao_Paulo',
+      year: 'numeric',
+      month: 'long',
+      day: 'numeric',
+      hour: 'numeric',
+      minute: 'numeric'
+    };
+  
+    const date = new Date(dateString);
+    return date.toLocaleString('en-US', options);
+  };
+
     return (
       <div className="overlay">
         <div className="modal">
@@ -63,7 +78,6 @@ const Modal = ( {mode, setShowModal, getData, task }) => {
             <h3>Let's {mode} a task</h3>
             <button onClick={ () => setShowModal(false) }>X</button>
           </div>
-
           <form>
             <input
               required
@@ -81,7 +95,9 @@ const Modal = ( {mode, setShowModal, getData, task }) => {
               name="description"
               value={ data.description }
               onChange={handleChange}/>
-              
+              <div>
+              {task && task.updated_at && (<p className="update-date">Updated on: {formatDate(task.updated_at)}</p>)}
+              </div>
               <br/>
             <input className={ mode }type="submit" onClick={ editMode ? editData : postData }/>
           </form>
