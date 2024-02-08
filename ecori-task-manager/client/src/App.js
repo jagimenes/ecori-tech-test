@@ -22,8 +22,8 @@ const App = () => {
 
   return (
     <div className="app">
-      <ListHeader listName={'Ecori Task Manager'}/>
-      {sortedTasks?.map((task) => <ListItem key={task.id} task={task}/>)}
+      <ListHeader listName={'Ecori Task Manager'} getData={ getData }/>
+      {sortedTasks?.map((task) => <ListItem key={ task.id } task={ task } getData={ getData }/>)}
     </div>
   )
 }

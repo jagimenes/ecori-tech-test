@@ -4,10 +4,10 @@ CREATE TABLE tasks (
     id VARCHAR(255) PRIMARY KEY,
     user_email VARCHAR(255),
     title VARCHAR(255),
-    description TEXT,
-    completed_at TIMESTAMP,
-    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-    updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+    description VARCHAR(2550),
+    created_at VARCHAR(250),
+    updated_at VARCHAR(250),
+    completed_at VARCHAR(250)
 );
 
 CREATE TABLE users (

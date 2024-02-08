@@ -20,14 +20,39 @@ app.get('/tasks/:userEmail',async (req,res) =>{
 })
 
 //Create a new task
-app.post('/tasks', (req, res) => {
+app.post('/tasks', async (req, res) => {
     const { user_email, title, description, created_at } = req.body
-    console.log(user_email, title, description, created_at)
     const id = uuidv4()
     try {
-        pool.query(`INSERT INTO tasks(id, user_email, title, description, created_at) 
+        const newTask = await pool.query(`INSERT INTO tasks(id, user_email, title, description, created_at) 
         VALUES ($1, $2, $3, $4, $5)`,
         [id, user_email, title, description, created_at])
+        res.json(newTask)
+    } catch (err) {
+        console.error(err)
+    }
+})
+
+//Edit a task
+app.put('/tasks/:id', async (req,res) => {
+    const { id } = req.params
+    const { user_email, title, description, updated_at } = req.body
+    try {
+        const editTask = await pool.query('UPDATE tasks SET user_email = $1, title = $2, description = $3, updated_at = $4 WHERE id = $5;',
+        [user_email, title, description, updated_at, id])
+        res.json(editTask)
+    } catch (err) {
+        console.error(err)
+    }
+})
+
+//Delete a task
+app.delete('/tasks/:id', async(req,res) => {
+    const { id } = req.params
+    try {
+        const deleteTask = await pool.query('DELETE FROM tasks WHERE id = $1',
+        [id])
+        res.json(deleteTask)
     } catch (err) {
         console.error(err)
     }

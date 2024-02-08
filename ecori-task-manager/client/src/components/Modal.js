@@ -1,24 +1,46 @@
 import { useState } from 'react'
 
-const Modal = ( {mode, setShowModal, task }) => {
+const Modal = ( {mode, setShowModal, getData, task }) => {
   const editMode = mode === 'edit' ? true : false
 
   const [data, setData] = useState({
-    user_email: editMode ? task.user_email : 'rand@test.com',
-    title: editMode ? task.title : null,
-    description: editMode ? task.description : null,
-    date: editMode ? "" : new Date()
+    user_email: editMode ? task.user_email : 'claud@test.com',
+    title: editMode ? task.title : "",
+    description: editMode ? task.description : "",
+    created_at: editMode ? "" : new Date(),
+    updated_at: editMode ? new Date() : ""
   })
 
   const postData = async (e) => {
     e.preventDefault()
     try {
-      const response = await fetch('http://localhost:8000/tasks', {
+      console.log(process.env.REACT_APP_SERVER_URL)
+      const response = await fetch(`http://localhost:8000/tasks`, {
         method: "POST",
         headers: { 'Content-Type' : 'application/json' },
         body: JSON.stringify(data)
       })
-      console.log(response)
+      if (response.status === 200) {
+        setShowModal(false)
+        getData()
+      }
+    } catch (err) {
+      console.error(err)
+    }
+  }
+
+  const editData = async (e) => {
+    e.preventDefault()
+    try {
+      const response = await fetch(`http://localhost:8000/tasks/${ task.id }`,{
+        method:"PUT",
+        headers: { 'Content-Type' : 'application/json' },
+        body: JSON.stringify(data)
+      })
+      if (response.status === 200) {
+        setShowModal(false)
+        getData()
+      }
     } catch (err) {
       console.error(err)
     }
@@ -59,7 +81,7 @@ const Modal = ( {mode, setShowModal, task }) => {
               onChange={handleChange}/>
               
               <br/>
-            <input className={ mode }type="submit" onClick={ editMode ? '' : postData }/>
+            <input className={ mode }type="submit" onClick={ editMode ? editData : postData }/>
           </form>
         </div>
       </div>
