@@ -50,12 +50,12 @@ const Auth = () => {
             { error && <p>{error}</p> }
           </form>
           <div className="auth-options">
-            <button onClick={ () => viewLogin(false) }
-            style={ { backgroundColor : !isLogin ? '#ffffff' : '#bcbcbc'} }
-            >Sign up</button>
             <button onClick={ () => viewLogin(true) }
             style={ { backgroundColor : isLogin ? '#ffffff' : '#bcbcbc'} }
             >Login</button>
+            <button onClick={ () => viewLogin(false) }
+            style={ { backgroundColor : !isLogin ? '#ffffff' : '#bcbcbc'} }
+            >Sign up</button>
           </div>
         </div>
       </div>

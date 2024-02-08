@@ -15,10 +15,28 @@ const ListItem = ({ task, getData }) => {
       console.error(err)
     }
   }
+
+  const formatDate = (dateString) => {
+    const options = {
+      timeZone: 'America/Sao_Paulo',
+      year: 'numeric',
+      month: 'long',
+      day: 'numeric',
+      hour: 'numeric',
+      minute: 'numeric'
+    };
+  
+    const date = new Date(dateString);
+    return date.toLocaleString('en-US', options);
+  };
+
     return (
       <li className="list-item">
         <div className="info-container">
           <p className="task-title">{task.title}</p>
+        </div>
+        <div className="date-info">
+        <p className="creation-date">Created on: {formatDate(task.created_at)}</p>
         </div>
         <div className="button-container">
           <button className="edit" onClick={ () => setShowModal(true) }>Edit</button>

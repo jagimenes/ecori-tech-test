@@ -92,6 +92,27 @@ input {
     display: flex;
     align-items: center;
     margin-left: 25px;
+    /* justify-content: space-between; */
+}
+
+.task-title {
+    max-width: 400px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    margin-right: 10px;
+}
+
+.date-info {
+    display: flex;
+    align-items: center;
+    width: 185px;
+    margin-left: auto;
+    margin-right: 10px;
+}
+
+.creation-date {
+    font-size: 10px;
+    color: #727290;
 }
 
 /* Modal */

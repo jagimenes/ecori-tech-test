@@ -31,8 +31,8 @@ const App = () => {
     <div className="app">
       {!authToken && <Auth/>}
       {authToken &&
-      <> <ListHeader listName={'Ecori Task Manager'} getData={ getData }/>
-      <p className="user-email">Welcome, { userEmail }</p>
+      <> <p className="user-email">Welcome, { userEmail }</p> 
+      <ListHeader listName={'Ecori Task Manager'} getData={ getData } />
       {sortedTasks?.map((task) => <ListItem key={ task.id } task={ task } getData={ getData }/>)}
       </>}
     </div>
