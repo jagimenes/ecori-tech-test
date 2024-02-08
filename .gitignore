@@ -4,6 +4,8 @@
 /ecori-task-manager/node_modules
 /ecori-task-manager/client/node_modules
 /ecori-task-manager/server/node_modules
+ecori-task-manager/client/package-lock.json
+ecori-task-manager/server/package-lock.json
 /.pnp
 .pnp.js
 

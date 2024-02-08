@@ -1,10 +1,12 @@
 import { useState } from 'react'
+import { useCookies } from 'react-cookie'
 
 const Modal = ( {mode, setShowModal, getData, task }) => {
+  const [cookies, setCookie, removeCookie] = useCookies(null)
   const editMode = mode === 'edit' ? true : false
 
   const [data, setData] = useState({
-    user_email: editMode ? task.user_email : 'claud@test.com',
+    user_email: editMode ? task.user_email : cookies.Email,
     title: editMode ? task.title : "",
     description: editMode ? task.description : "",
     created_at: editMode ? "" : new Date(),
@@ -15,7 +17,7 @@ const Modal = ( {mode, setShowModal, getData, task }) => {
     e.preventDefault()
     try {
       console.log(process.env.REACT_APP_SERVER_URL)
-      const response = await fetch(`http://localhost:8000/tasks`, {
+      const response = await fetch(`${process.env.REACT_APP_SERVERURL}/tasks`, {
         method: "POST",
         headers: { 'Content-Type' : 'application/json' },
         body: JSON.stringify(data)
@@ -32,7 +34,7 @@ const Modal = ( {mode, setShowModal, getData, task }) => {
   const editData = async (e) => {
     e.preventDefault()
     try {
-      const response = await fetch(`http://localhost:8000/tasks/${ task.id }`,{
+      const response = await fetch(`${process.env.REACT_APP_SERVERURL}/tasks/${ task.id }`,{
         method:"PUT",
         headers: { 'Content-Type' : 'application/json' },
         body: JSON.stringify(data)
