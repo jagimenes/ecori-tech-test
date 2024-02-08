@@ -25,7 +25,7 @@ const App = () => {
       getData()
     }})
 
-  const sortedTasks = tasks?.sort((a,b) => new Date(a.created_at) - new Date(a.created_at))
+  const sortedTasks = tasks?.sort((a,b) => new Date(b.created_at) - new Date(a.created_at))
 
   return (
     <div className="app">

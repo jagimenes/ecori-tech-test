@@ -38,10 +38,10 @@ app.post('/tasks', async (req, res) => {
 //Edit a task
 app.put('/tasks/:id', async (req,res) => {
     const { id } = req.params
-    const { user_email, title, description, updated_at } = req.body
+    const { user_email, title, description, updated_at, completed_at } = req.body
     try {
-        const editTask = await pool.query('UPDATE tasks SET user_email = $1, title = $2, description = $3, updated_at = $4 WHERE id = $5;',
-        [user_email, title, description, updated_at, id])
+        const editTask = await pool.query('UPDATE tasks SET user_email = $1, title = $2, description = $3, updated_at = $4, completed_at = $5 WHERE id = $6;',
+        [user_email, title, description, updated_at, completed_at, id])
         res.json(editTask)
     } catch (err) {
         console.error(err)

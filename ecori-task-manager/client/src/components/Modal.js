@@ -95,7 +95,12 @@ const Modal = ( {mode, setShowModal, getData, task }) => {
               name="description"
               value={ data.description }
               onChange={handleChange}/>
-              <div>
+              <div className="update-box">
+              <label className="switch">
+                <input type="checkbox"></input>
+                <span className="slider round"></span>
+              </label>
+              <span className="completed-text">Completed</span>
               {task && task.updated_at && (<p className="update-date">Updated on: {formatDate(task.updated_at)}</p>)}
               </div>
               <br/>
