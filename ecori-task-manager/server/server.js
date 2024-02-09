@@ -11,12 +11,37 @@ app.use(cors())
 app.use(express.json())
 
 //Get all tasks
-app.get('/tasks/:userEmail',async (req,res) =>{
-    const { userEmail } = req.params
-    try{
-        const tasks = await pool.query('SELECT * FROM tasks WHERE user_email = $1', [userEmail])
+app.get('/tasks',async (req,res) =>{
+
+    let { userEmail, title, description, page, pageSize } = req.query
+    title = title || ''
+    description = description || ''
+    pageSize = pageSize || null
+    page = page || null
+    
+    try {
+        const offset = (page - 1) * pageSize
+
+        let query = 'SELECT * FROM tasks WHERE user_email = $1'
+        const values = [userEmail]
+
+        if (title !== '') {
+            query += ' AND title = $2'
+            values.push(title)
+        }
+
+        if (description !== '') {
+            const descIndex = title !== '' ? 3 : 2
+            query += ` AND description = $${descIndex}`
+            values.push(description)
+        }
+
+        query += ' OFFSET $' + (values.length + 1) + ' LIMIT $' + (values.length + 2)
+        values.push(offset, pageSize)
+
+        const tasks = await pool.query(query, values)
         res.json(tasks.rows)
-    }catch(err){
+    } catch(err){
         console.error(err)
     }
 })

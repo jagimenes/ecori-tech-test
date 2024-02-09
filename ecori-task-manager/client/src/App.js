@@ -12,7 +12,7 @@ const App = () => {
 
   const getData = async () => {
     try{
-      const response = await fetch(`${process.env.REACT_APP_SERVERURL}/tasks/${userEmail}`)
+      const response = await fetch(`${process.env.REACT_APP_SERVERURL}/tasks?userEmail=${userEmail}&title=5`)
       const json = await response.json()
       setTasks(json)
     }catch (err) {
@@ -23,7 +23,7 @@ const App = () => {
   useEffect(() => {
     if(authToken){ 
       getData()
-    }})
+    }}, [])
 
   const sortedTasks = tasks?.sort((a,b) => new Date(b.created_at) - new Date(a.created_at))
 
