@@ -1,8 +1,9 @@
 import { Request, Response } from "express";
-import taskService from "../services/taskService";
+import taskService from "../services/TaskService";
 import pool from "../model";
+import { ITasksController } from "../types";
 
-class tasksController {
+class TasksController implements ITasksController {
   async getAllTasks(req: Request, res: Response) {
     try {
       const titleFilters = (req.query.title as string) ?? "%%";
@@ -48,7 +49,7 @@ class tasksController {
     }
   }
 
-  async createNewTask(req: Request, res: Response): Promise<void> {
+  async createNewTask(req: Request, res: Response) {
     try {
       const { title, description } = req.body;
       const newTask = await taskService.createNewTask({ title, description });
@@ -118,6 +119,7 @@ class tasksController {
 
     try {
       await taskService.taskUpload(filePath);
+
       res.status(200).json({ message: "CSV data upload successfully." });
     } catch (err) {
       console.error(err);
@@ -128,4 +130,4 @@ class tasksController {
   }
 }
 
-export default new tasksController();
+export default new TasksController();

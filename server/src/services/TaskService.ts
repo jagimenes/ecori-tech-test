@@ -1,21 +1,28 @@
 import pool from "../model/index";
 import * as fs from "fs";
 import csvParser from "csv-parser";
+import {
+  GetAll,
+  ITaskService,
+  ItaskUpload,
+  Task,
+  TaskPayload,
+  queryValues,
+} from "../types";
 
-interface TaskPayload {
-  taskId?: string;
-  title: string;
-  description: string;
-}
-
-class TaskService {
-  async getAllTasks({ titleFilters, descriptionFilters, page, pageSize }: any) {
+class TaskService implements ITaskService {
+  async getAllTasks({
+    titleFilters,
+    descriptionFilters,
+    page,
+    pageSize,
+  }: GetAll) {
     const client = await pool.connect();
     const limit = pageSize;
     const offset = (page - 1) * pageSize;
 
     let queryText = "SELECT * FROM tasks ORDER BY id LIMIT $1 OFFSET $2";
-    let queryValues = [limit, offset];
+    let queryValues: queryValues = [limit, offset];
 
     if (titleFilters !== undefined || descriptionFilters !== undefined) {
       queryText =
@@ -45,7 +52,11 @@ class TaskService {
     try {
       const result = await client.query(queryText, queryValue);
 
-      return result.rows;
+      if (!result.rows.length) {
+        throw new Error(`Task ID: ${taskId} not found`);
+      }
+
+      return result.rows[0];
     } finally {
       client.release();
     }
@@ -132,6 +143,7 @@ class TaskService {
 
       await client.query("DELETE FROM tasks WHERE id = $1", [taskId]);
 
+      console.log(result.rows[0]);
       return result.rows[0];
     } finally {
       client.release();
@@ -166,12 +178,12 @@ class TaskService {
 
   async taskUpload(filePath: string) {
     const client = await pool.connect();
-    const result: any[] = [];
+    const result: ItaskUpload[] = [];
 
     return new Promise<void>((resolve, reject) => {
       fs.createReadStream(filePath)
         .pipe(csvParser())
-        .on("data", (row) => {
+        .on("data", (row: ItaskUpload) => {
           result.push(row);
         })
         .on("end", async () => {
@@ -180,7 +192,7 @@ class TaskService {
 
           try {
             await Promise.all(
-              result.map(async (row: any) => {
+              result.map(async (row) => {
                 const { title, description } = row;
 
                 if (title !== null || description !== null) {

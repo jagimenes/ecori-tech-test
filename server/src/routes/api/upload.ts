@@ -1,8 +1,8 @@
 import { Router } from "express";
-import tasksController from "../../controllers/tasksController";
+import TasksController from "../../controllers/TasksController";
 
 const router = Router();
 
-router.post("/upload", tasksController.taskUpload);
+router.post("/upload", TasksController.taskUpload);
 
 export default router;
