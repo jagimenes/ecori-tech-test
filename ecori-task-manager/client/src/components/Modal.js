@@ -1,12 +1,18 @@
+// Import modules and hooks
 import { useState, useEffect } from 'react'
 import { useCookies } from 'react-cookie'
 
+// Define the Modal component
 const Modal = ({ mode, setShowModal, getData, task }) => {
 
+  // Use cookies hook to access cookies
   const [cookies] = useCookies(null)
+
+  // Determine if the mode is 'edit'
   const editMode = mode === 'edit' ? true : false
+
+  // Initialize state for form data
   const [isChecked, setIsChecked] = useState(editMode && task && task.completed_at)
-  
   const [data, setData] = useState({
     user_email: editMode ? task.user_email : cookies.Email,
     title: editMode ? (task.title || '') : '',
@@ -16,6 +22,7 @@ const Modal = ({ mode, setShowModal, getData, task }) => {
     completed_at: isChecked ? new Date() : '',
   })
 
+  // Effect hook to update the 'completed_at' field in the form data when checkbox changes
   useEffect(() => {
     if (isChecked) {
       setData((prevData) => ({
@@ -30,6 +37,12 @@ const Modal = ({ mode, setShowModal, getData, task }) => {
     }
   }, [isChecked])
 
+  // Function to handle checkbox changes in the form
+  const handleCheckboxChange = () => {
+    setIsChecked((prevIsChecked) => !prevIsChecked)
+  }
+
+  // Function to handle form submission for creating a new task
   const postData = async (e) => {
     e.preventDefault();
     try {
@@ -47,6 +60,7 @@ const Modal = ({ mode, setShowModal, getData, task }) => {
     }
   }
 
+  // Function to handle form submission for editing an existing task
   const editData = async (e) => {
     e.preventDefault()
     try {
@@ -64,6 +78,7 @@ const Modal = ({ mode, setShowModal, getData, task }) => {
     }
   }
 
+  // Function to handle input changes in the form
   const handleChange = (e) => {
     const { name, value } = e.target;
 
@@ -73,10 +88,7 @@ const Modal = ({ mode, setShowModal, getData, task }) => {
     }))
   }
 
-  const handleCheckboxChange = () => {
-    setIsChecked((prevIsChecked) => !prevIsChecked)
-  }
-
+  // Function to format date
   const formatDate = (dateString) => {
     const options = {
       timeZone: 'America/Sao_Paulo',
@@ -86,11 +98,11 @@ const Modal = ({ mode, setShowModal, getData, task }) => {
       hour: 'numeric',
       minute: 'numeric',
     }
-
     const date = new Date(dateString)
     return date.toLocaleString('en-US', options)
   }
 
+  // Render the Modal component
   return (
     <div className="overlay">
       <div className="modal">
@@ -148,4 +160,5 @@ const Modal = ({ mode, setShowModal, getData, task }) => {
   );
 };
 
+// Export the Modal component
 export default Modal;

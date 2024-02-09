@@ -1,3 +1,4 @@
+// Import modules and set up constants
 const PORT = process.env.PORT ?? 8000
 const express = require('express')
 const { v4: uuidv4 } = require('uuid')
@@ -7,12 +8,12 @@ const pool = require('./database')
 const bcrypt = require('bcrypt')
 const jwt = require('jsonwebtoken')
 
+// Middleware setup
 app.use(cors())
 app.use(express.json())
 
-//Get all tasks
+// Route to get all tasks
 app.get('/tasks',async (req,res) =>{
-
     let { userEmail, title, description, page, pageSize } = req.query
     title = title || ''
     description = description || ''
@@ -20,7 +21,6 @@ app.get('/tasks',async (req,res) =>{
     page = page || null
     try {
         const offset = (page - 1) * pageSize
-
         let query = 'SELECT * FROM tasks WHERE user_email = $1'
         const values = [userEmail]
 
@@ -28,18 +28,15 @@ app.get('/tasks',async (req,res) =>{
             query += ' AND title = $2'
             values.push(title)
         }
-
         if (description !== '') {
             const descIndex = title !== '' ? 3 : 2
             query += ` AND description = $${descIndex}`
             values.push(description)
         }
-
         if (page) {
             const offset = (page - 1) * pageSize
             query += ' OFFSET $' + (values.length + 1)
             values.push(offset)
-
             if (pageSize) {
                 query += ' LIMIT $' + (values.length + 2)
                 values.push(offset, pageSize)
@@ -53,7 +50,7 @@ app.get('/tasks',async (req,res) =>{
     }
 })
 
-//Create a new task
+// Route to create a new task
 app.post('/tasks', async (req, res) => {
     const { user_email, title, description, created_at } = req.body
     const id = uuidv4()
@@ -67,7 +64,7 @@ app.post('/tasks', async (req, res) => {
     }
 })
 
-//Edit a task
+// Route to edit a task
 app.put('/tasks/:id', async (req,res) => {
     const { id } = req.params
     const { user_email, title, description, updated_at, completed_at } = req.body
@@ -80,7 +77,7 @@ app.put('/tasks/:id', async (req,res) => {
     }
 })
 
-//Delete a task
+// Route to delete a task
 app.delete('/tasks/:id', async(req,res) => {
     const { id } = req.params
     try {
@@ -92,20 +89,16 @@ app.delete('/tasks/:id', async(req,res) => {
     }
 })
 
-// Sign up
+// Route for user signup
 app.post('/signup', async (req,res) => {
-
     const { email, password } = req.body
     const salt = bcrypt.genSaltSync(10)
     const hashedPassword = bcrypt.hashSync(password,salt)
-
     try {
         const signUp = await pool.query(`INSERT INTO users (email, password) VALUES ($1, $2)`,
         [email, hashedPassword])
-
         const token = jwt.sign( { email }, 'secret', { expiresIn: '1hr' })
         res.json({ email, token })
-
     } catch (err) {
         console.error(err)
         if(err){
@@ -114,19 +107,15 @@ app.post('/signup', async (req,res) => {
     }
 })
 
-// Login
+// Route for user login
 app.post('/login', async (req,res) => {
-
     const { email, password } = req.body
-
     try {
-
         const users = await pool.query('SELECT * FROM  users WHERE email =$1', [email])
 
         if(!users.rows.length){
             return res.json({ detail : 'Account does not exist' })
         }
-
         const success = await bcrypt.compare(password, users.rows[0].password)
         const token = jwt.sign( { email }, 'secret', { expiresIn: '1hr' })
 
@@ -140,6 +129,7 @@ app.post('/login', async (req,res) => {
     }
 })
 
+// Start the server
 app.listen(PORT, () => {
     console.log(`Server is running on port ${PORT}`);
 });

@@ -1,19 +1,24 @@
+// Import modules and hooks
 import Modal from "./Modal"
 import { useState } from "react"
 import { useCookies } from "react-cookie"
 
+// Define the ListHeader component
 const ListHeader = ({ listName, getData }) => {
   const [cookies, setCookie, removeCookie] = useCookies(null)
   const [showModal, setShowModal] = useState(false)
 
+  // Initialize state for form data
   const [data, setData] = useState({
     title: '',
     description: '',
   })
 
+  // Function to handle changes in the input fields
   const handleChange = (e) => {
     const { name, value } = e.target;
 
+    // Update the form data
     const newData = {
       ...data,
       [name]: value,
@@ -21,15 +26,18 @@ const ListHeader = ({ listName, getData }) => {
 
     setData(newData)
 
+    // Fetch data based on the updated form data
     getData(newData.title, newData.description)
   }
 
+  // Function to sign out the user
   const signOut = () => {
     removeCookie('Email')
     removeCookie('AuthToken')
     window.location.reload()
   }
 
+  // Render the ListHeader component
   return (
     <div className="list-header">
       <h1>{listName}</h1>
@@ -63,4 +71,5 @@ const ListHeader = ({ listName, getData }) => {
   )
 }
 
+// Export the ListHeader component
 export default ListHeader

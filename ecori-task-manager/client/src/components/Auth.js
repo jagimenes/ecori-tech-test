@@ -1,43 +1,53 @@
+// Import hooks
 import { useState } from 'react'
 import { useCookies } from 'react-cookie'
 
+// Define the Auth component
 const Auth = () => {
   const [cookies, setCookie, removeCookie] = useCookies(null)
+
+  // Use state hook to manage component state
   const [isLogin, setIsLogIn] = useState(true)
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
   const [confirmPassword, setConfirmPassword] = useState('')
   const [error, setError] = useState(null)
 
+  // Function to switch between login and signup views
   const viewLogin = (status) => {
     setError(null)
     setIsLogIn(status)
   }
 
+  // Function to handle form submission
   const handleSubmit = async (e, endpoint) => {
     e.preventDefault()
+    // Validate passwords if signing up
     if(!isLogin && password !== confirmPassword) {
       setError('The passwords have to match!')
       return
     }
 
+    // Send request to server for login or signup
     const response = await fetch(`${process.env.REACT_APP_SERVERURL}/${endpoint}`, {
       method: 'POST',
       headers: { 'Content-Type' : 'application/json'},
       body: JSON.stringify({ email, password })
     })
-
     const data = await response.json()
-    
+
+    // Handle response from server
     if(data.detail){
       setError(data.detail)
     } else{
+      // Set cookies and reload the page
       setCookie('Email', data.email)
       setCookie('AuthToken', data.token)
       window.location.reload()
     }
   }
 
+    // Render the Auth component
     return (
       <div className="auth-container">
         <div className="auth-container-box">
@@ -62,5 +72,6 @@ const Auth = () => {
     )
   }
   
+  // Export the Auth component
   export default Auth
   

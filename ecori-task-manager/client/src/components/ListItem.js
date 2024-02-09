@@ -1,9 +1,13 @@
+// Import modules and hooks
 import { useState } from "react"
 import Modal from "./Modal"
 
+// Define the ListItem component
 const ListItem = ({ task, getData }) => {
+  // Use state hook to manage component state
   const [showModal, setShowModal] = useState(false)
   
+  // Function to delete the current item
   const deleteItem = async () => {
     try {
       const response = await fetch(`${process.env.REACT_APP_SERVERURL}/tasks/${ task.id }`,{
@@ -17,6 +21,7 @@ const ListItem = ({ task, getData }) => {
     }
   }
 
+  // Function to format a date string
   const formatDate = (dateString) => {
     const options = {
       timeZone: 'America/Sao_Paulo',
@@ -26,11 +31,11 @@ const ListItem = ({ task, getData }) => {
       hour: 'numeric',
       minute: 'numeric'
     }
-  
     const date = new Date(dateString);
     return date.toLocaleString('en-US', options);
   }
 
+    // Render the ListItem component
     return (
       <li className="list-item">
         <div className="info-container">
@@ -48,5 +53,6 @@ const ListItem = ({ task, getData }) => {
     )
   }
   
+  // Export the ListItem component
   export default ListItem
   
