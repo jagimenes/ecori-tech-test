@@ -64,62 +64,59 @@ function SingleTask() {
 
   return (
     <div className="">
-      {task &&
-        task.map((taskItem) => (
-          <div className="task" key={taskItem.id}>
-            <h1>Task {taskItem.id}</h1>
-            <form onSubmit={(e) => updateTask(e)}>
-              <div className="form-control">
-                <label htmlFor="title">Title:</label>
-                <input
-                  type="text"
-                  name="title"
-                  id="title"
-                  value={titleChanged ? title : taskItem.title}
-                  onChange={(e) => {
-                    setTitle(e.target.value);
-                    setTitleChanged(true);
-                  }}
-                />
-              </div>
-              <div className="form-control">
-                <label htmlFor="description">Description:</label>
-                <textarea
-                  name="description"
-                  id="description"
-                  value={
-                    descriptionChanged ? description : taskItem.description
-                  }
-                  onChange={(e) => {
-                    setDescription(e.target.value);
-                    setDescriptionChanged(true);
-                  }}
-                />
-              </div>
-              <input type="submit" value="Save" />
-            </form>
-            <div className="details">
-              <div className="date">
+      {task && (
+        <div className="task" key={task.id}>
+          <h1>Task {task.id}</h1>
+          <form onSubmit={(e) => updateTask(e)}>
+            <div className="form-control">
+              <label htmlFor="title">Title:</label>
+              <input
+                type="text"
+                name="title"
+                id="title"
+                value={titleChanged ? title : task.title}
+                onChange={(e) => {
+                  setTitle(e.target.value);
+                  setTitleChanged(true);
+                }}
+              />
+            </div>
+            <div className="form-control">
+              <label htmlFor="description">Description:</label>
+              <textarea
+                name="description"
+                id="description"
+                value={descriptionChanged ? description : task.description}
+                onChange={(e) => {
+                  setDescription(e.target.value);
+                  setDescriptionChanged(true);
+                }}
+              />
+            </div>
+            <input type="submit" value="Save" />
+          </form>
+          <div className="details">
+            <div className="date">
+              <span>
+                <strong>Created at:</strong> {task.created_at}
+              </span>
+              {task.updated_at && (
                 <span>
-                  <strong>Created at:</strong> {taskItem.created_at}
+                  <strong>Updated at:</strong> {task.updated_at}
                 </span>
-                {taskItem.updated_at && (
-                  <span>
-                    <strong>Updated at:</strong> {taskItem.updated_at}
-                  </span>
-                )}
-              </div>
-              <div className="btns">
-                <button className="btn" onClick={deleteTask}>
-                  Delete
-                </button>
-                <button className="btn completed" onClick={markCompleted}>
-                  Completed
-                </button>
-              </div>
+              )}
+            </div>
+            <div className="btns">
+              <button className="btn" onClick={deleteTask}>
+                Delete
+              </button>
+              <button className="btn completed" onClick={markCompleted}>
+                Completed
+              </button>
             </div>
           </div>
-        ))}
+        </div>
+      )}
     </div>
   );
 }

@@ -17,7 +17,6 @@ const Home = () => {
 
       const data = response.data["tasks"];
       const page = response.data["page"];
-      console.log(data);
       setTasks(data);
       setpage(page);
     } catch (err) {
