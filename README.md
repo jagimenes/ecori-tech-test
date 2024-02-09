@@ -1,35 +1,46 @@
-[![pt-br](https://img.shields.io/badge/lang-pt--br-green.svg)](https://github.com/jagimenes/ecori-tech-test/blob/main/README.pt-br.md)
+# Project Setup Instructions
 
-## Tech test to integrate the Ecori Team ☀
+Follow these steps to set up the project:
 
-<br>
+1. **Clone the Repository:**
+    - Clone the repository [ecori-tech-test](https://github.com/claudgoeswild/ecori-tech-test) on GitHub.
 
-## Create a Rest API and a task management SPA. <br>
+2. **Install Client Requirements:**
+    - Navigate to the `client` folder and install all requirements using the command:
+      ```
+      npm i
+      ```
 
-## :computer: Functionalities (Back-end)
-🔴 A route of **tasks listing**, receiving parameters like filters (_title_ ou _description_) and pagination (_page_ e _pageSize_);<br>
-🔴 A route of **task creation**, receiving fields, _title_, _description_. The complete object, on database, should have more 3 fields: _completed_at_ (to control when the task is done), _created_at_ (to control when the task was created) and _updated_at_ (to control when the task was updated);<br>
-🔴 A route of **task update**, receiving by route params the task _id_, and receiving fields like _title_, _description_;<br>
-🔴 A route of **task removal**, receiving by route params the task _id_;<br>
-🔴 A route of **mark task as done**, receiving by route params the task _id_;<br>
-**Other suggestions**<br>
-🟢 **Bonus 1**: Importing tasks, with a list of _title_ and _description_, from a CSV file;<br>
-🟢 **Bonus 2**: Auth control with login;<br>
+3. **Install Server Requirements:**
+    - Navigate to the `server` folder and install all requirements using the command:
+      ```
+      npm i
+      ```
 
-## :computer: Functionalities (Front-end)
-🔴Implement all backend functionalities <br>
+4. **Set Up PostgreSQL:**
+    - Download, install, and create a user in PostgreSQL.
 
-## Technologies and tools you have to use:
-☑️ [Javascript](https://developer.mozilla.org/en-US/docs/Web/JavaScript) <br>
-☑️ [Node.js](https://nodejs.org/) <br>
-☑️ [React](https://react.dev/) <br>
-☑️ [PostgreSQL](https://www.postgresql.org/) <br>
-❗ It would be awesome, if you could provide us with an application with **tests** <br>
-❗ It would be awesome, if you implemented some treatment for concurrency in the data update routes <br>
+5. **Database Setup:**
+    - Set up the database of the project similar to `db.sql` inside the `server` folder.
 
-## Start instructions
-- Create a fork of this project
-- Do all the tasks to complete the application
-- Create a README.md showing the steps to run the application
-- Make a merge request on the main branch
-- Send us the link of the merge request
+6. **Set Up Environment Variables:**
+    - In the `client` folder, set the following environment variable for local testing:
+      ```
+      REACT_APP_SERVERURL=http://localhost:8000
+      ```
+    - In the `server` folder, set up environment variables to access the database:
+        - `USRNAME=yourUsername`
+        - `PASSWORD=yourPassword`
+        - `HOST=localhost`
+        - `DBPORT=5432` (or another port you are using)
+
+7. **Start the Servers:**
+    - In both the `server` and `client` directories, run the command:
+      ```
+      npm run start
+      ```
+
+## Note:
+- Make sure you have Node.js and npm installed on your system.
+- Adjust configurations according to your environment setup.
+

@@ -1,0 +1,36 @@
+# See https://help.github.com/articles/ignoring-files/ for more about ignoring files.
+
+# dependencies
+/ecori-task-manager/node_modules
+/ecori-task-manager/client/node_modules
+/ecori-task-manager/server/node_modules
+ecori-task-manager/client/package-lock.json
+ecori-task-manager/server/package-lock.json
+/.pnp
+.pnp.js
+
+# Environment variables file
+.env
+
+# Log files
+*.log
+
+# Editor-specific files
+.vscode/
+
+# testing
+/coverage
+
+# production
+/build
+
+# misc
+.DS_Store
+.env.local
+.env.development.local
+.env.test.local
+.env.production.local
+
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
