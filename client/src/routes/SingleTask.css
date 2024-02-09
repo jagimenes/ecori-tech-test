@@ -1,0 +1,56 @@
+.btn {
+  background-color: #fff;
+  color: #333;
+  border: 1px solid #fff;
+  opacity: 1;
+  padding: 0.5 1rem;
+  border-radius: 1rem;
+  width: 130px;
+  height: 25px;
+  transition: 0.3s;
+}
+
+.btns {
+  display: flex;
+  gap: 30px;
+  align-items: center;
+  justify-content: center;
+}
+
+.btns .completed:hover {
+  color: #333;
+  background-color: #7beea1;
+}
+
+input[type="submit"] {
+  background-color: #fff;
+  color: #333;
+  border: 1px solid #fff;
+  opacity: 1;
+  padding: 0.5 1rem;
+  border-radius: 1rem;
+  width: 100px;
+  transition: 0.3s;
+}
+
+input[type="submit"]:hover {
+  background-color: #7beea1;
+}
+
+.details {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  margin-top: 40px;
+  gap: 30px;
+}
+
+.details .date {
+  display: flex;
+  gap: 30px;
+}
+
+.details span {
+  font-size: 13px;
+}
