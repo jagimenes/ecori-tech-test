@@ -318,3 +318,26 @@ input:checked + .slider:before {
     padding: 10px;
     color: #23262f;
 }
+
+/* pagination */
+
+.pagination-container {
+    display: flex;
+    flex-direction: column;
+}
+
+.pagination-list {
+    display: flex;
+    flex-direction: row;
+    margin-left: auto;
+}
+
+.pagination-element {
+    display: flex;
+    cursor: pointer;
+    font-weight: lighter;
+}
+
+.pagination-element-atual {
+    font-weight: bold;
+}

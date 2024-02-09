@@ -58,7 +58,7 @@ const ListHeader = ({ listName, getData }) => {
           />
         </div>
       </div>
-      {showModal && <Modal mode={'create'} setShowModal={setShowModal} getData={getData} />}
+      {showModal && <Modal mode={'create'} setShowModal={setShowModal} getData={getData(data.title, data.description)} />}
     </div>
   )
 }
