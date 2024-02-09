@@ -8,33 +8,51 @@ const App = () => {
   const [cookies, setCookie, removeCookie] = useCookies(null)
   const userEmail = cookies.Email
   const authToken = cookies.AuthToken
-  const [ tasks, setTasks ] = useState(null) 
+  const [tasks, setTasks] = useState(null)
 
-  const getData = async () => {
-    try{
-      const response = await fetch(`${process.env.REACT_APP_SERVERURL}/tasks?userEmail=${userEmail}&title=5`)
+  const getData = async (title = '', description = '', pageSize = null, page = null) => {
+    let request = `${process.env.REACT_APP_SERVERURL}/tasks?userEmail=${userEmail}`
+    if(title) {
+      request += `&title=${title}`
+    }
+
+    if(description) {
+      request += `&description=${description}`
+    }
+
+    if(pageSize) {
+      request += `&pageSize=${pageSize}`
+    }
+
+    if(page) {
+      request += `&page=${page}`
+    }
+
+    try {
+      const response = await fetch(request)
       const json = await response.json()
       setTasks(json)
-    }catch (err) {
+    } catch (err) {
       console.error(err)
     }
   }
 
   useEffect(() => {
-    if(authToken){ 
+    if (authToken) {
       getData()
-    }}, [])
+    }
+  }, [])
 
-  const sortedTasks = tasks?.sort((a,b) => new Date(b.created_at) - new Date(a.created_at))
+  const sortedTasks = tasks?.sort((a, b) => new Date(b.created_at) - new Date(a.created_at))
 
   return (
     <div className="app">
-      {!authToken && <Auth/>}
+      {!authToken && <Auth />}
       {authToken &&
-      <> <p className="user-email">Welcome, { userEmail }</p> 
-      <ListHeader listName={'Ecori Task Manager'} getData={ getData } />
-      {sortedTasks?.map((task) => <ListItem key={ task.id } task={ task } getData={ getData }/>)}
-      </>}
+        <> <p className="user-email">Welcome, {userEmail}</p>
+          <ListHeader listName={'Ecori Task Manager'} getData={getData} />
+          {sortedTasks?.map((task) => <ListItem key={task.id} task={task} getData={getData} />)}
+        </>}
     </div>
   )
 }

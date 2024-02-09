@@ -45,6 +45,18 @@ input {
 .button-container {
     display: flex;
     align-items: center;
+    justify-content: end;
+}
+
+.right-container {
+    display: flex;
+    flex-direction: column;
+}
+
+.search-container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 
 .button-container button {
@@ -306,7 +318,3 @@ input:checked + .slider:before {
     padding: 10px;
     color: #23262f;
 }
-
-
-
-

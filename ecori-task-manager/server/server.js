@@ -18,7 +18,6 @@ app.get('/tasks',async (req,res) =>{
     description = description || ''
     pageSize = pageSize || null
     page = page || null
-    
     try {
         const offset = (page - 1) * pageSize
 
@@ -36,8 +35,16 @@ app.get('/tasks',async (req,res) =>{
             values.push(description)
         }
 
-        query += ' OFFSET $' + (values.length + 1) + ' LIMIT $' + (values.length + 2)
-        values.push(offset, pageSize)
+        if (page) {
+            const offset = (page - 1) * pageSize
+            query += ' OFFSET $' + (values.length + 1)
+            values.push(offset)
+
+            if (pageSize) {
+                query += ' LIMIT $' + (values.length + 2)
+                values.push(offset, pageSize)
+            }
+        }
 
         const tasks = await pool.query(query, values)
         res.json(tasks.rows)
