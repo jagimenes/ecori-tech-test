@@ -3,6 +3,7 @@ import Modal from "./Modal"
 
 const ListItem = ({ task, getData }) => {
   const [showModal, setShowModal] = useState(false)
+  
   const deleteItem = async () => {
     try {
       const response = await fetch(`${process.env.REACT_APP_SERVERURL}/tasks/${ task.id }`,{
@@ -24,16 +25,16 @@ const ListItem = ({ task, getData }) => {
       day: 'numeric',
       hour: 'numeric',
       minute: 'numeric'
-    };
+    }
   
     const date = new Date(dateString);
     return date.toLocaleString('en-US', options);
-  };
+  }
 
     return (
       <li className="list-item">
         <div className="info-container">
-          <p className="task-title">{task.title}</p>
+          <p className={`${task.completed_at && "completed"} task-title`}>{task.title}</p>
         </div>
         <div className="date-info">
         <p className="creation-date">Created on: {formatDate(task.created_at)}</p>

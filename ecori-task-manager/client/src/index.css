@@ -92,7 +92,6 @@ input {
     display: flex;
     align-items: center;
     margin-left: 25px;
-    /* justify-content: space-between; */
 }
 
 .task-title {
@@ -100,6 +99,10 @@ input {
     overflow: hidden;
     text-overflow: ellipsis;
     margin-right: 10px;
+}
+
+.completed {
+    text-decoration: line-through;
 }
 
 .date-info {
@@ -121,7 +124,7 @@ input {
     left: 0;
     top: 0;
     width: 100vw;
-    height: 100vw;
+    height: 100vh;
     background-color: #00000080;
     display: flex;
     justify-content: center;
@@ -259,9 +262,15 @@ input:checked + .slider:before {
     border-radius: 50%;
 }
 
+.completed-date {
+    margin-left: 5px;
+    font-size: 10px;
+    color: #727290;
+}
+
 .completed-text {
-    margin-left: -185px;
-    margin-top: 6.5px;
+    margin-left: 42px;
+    margin-top: -0.5px;
     font-size: 15px;
     color: #727290;
 }
