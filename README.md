@@ -51,6 +51,13 @@ npm run preview
 
 `Server running on port 3500`
 
+## Running the Tests
+
+```sh
+npm run test
+
+```
+
 # Instalação (client)
 
 1. Mude o seu diretório atual para a pasta do projeto:
