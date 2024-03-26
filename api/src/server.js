@@ -2,11 +2,11 @@ require("express-async-errors");
 require("dotenv/config");
 
 const express = require("express");
-const routes = require("./routes");
+const routes = require("./routes/index.js");
 // const cookieParser = require("cookie-parser");
 const cors = require("cors");
 
-const AppError = require("./utils/AppError");
+const AppError = require("./utils/AppError.js");
 const tableModel = require('./model/tableModel.js');
 
 const app = express();
