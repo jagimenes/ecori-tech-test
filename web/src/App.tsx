@@ -55,7 +55,6 @@ export function App() {
       });
       setNewTaskTitle('');
       setNewTaskDescription('');
-      alert('Tarefa criada com sucesso');
       setIsLoading(false);
       handleGetTasks();
     } catch (error: any) {
@@ -183,7 +182,9 @@ export function App() {
               <DialogClose asChild>
                 <Button type="button" variant="outline">Cancelar</Button>
               </DialogClose>
-              <Button type="submit" onClick={handleCreateTask}>Salvar</Button>
+              <DialogClose asChild>
+                <Button type="submit" onClick={handleCreateTask}>Salvar</Button>
+              </DialogClose>
             </DialogFooter>
           </form>
 
