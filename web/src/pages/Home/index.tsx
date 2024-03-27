@@ -1,19 +1,40 @@
 import { useEffect, useState } from 'react';
 import { Search, PlusCircle } from 'lucide-react';
-
-import { api } from './services/api';
-
-import { TaskCard } from './components/TaskCard';
-import { ShowPagination } from './components/ShowPagination';
-import { SkeletonCard } from './components/SkeletonCard';
-
-import { Button } from './components/ui/button';
-import { Input } from './components/ui/input';
-import { Dialog, DialogClose, DialogContent, DialogDescription, DialogFooter, DialogHeader, DialogTitle, DialogTrigger } from './components/ui/dialog';
-import { Label } from './components/ui/label';
+import { useNavigate } from 'react-router-dom';
 
 
-export function App() {
+import { api } from '@/services/api';
+import { useAuth } from '@/hooks/auth';
+
+import { TaskCard } from '@/components/TaskCard';
+import { ShowPagination } from '@/components/ShowPagination';
+import { SkeletonCard } from '@/components/SkeletonCard';
+
+import { Button } from '@/components/ui/button';
+import { Input } from '@/components/ui/input';
+import { Dialog, DialogClose, DialogContent, DialogDescription, DialogFooter, DialogHeader, DialogTitle, DialogTrigger } from '@/components/ui/dialog';
+import { Label } from '@/components/ui/label';
+import {
+  DropdownMenu,
+  DropdownMenuContent,
+  DropdownMenuItem,
+  DropdownMenuLabel,
+  DropdownMenuSeparator,
+  DropdownMenuTrigger,
+} from "@/components/ui/dropdown-menu";
+
+
+interface AuthContextProps {
+  user?: {name:string};
+  signOut?: () => void;
+}
+
+
+export function Home() {
+  const { user, signOut } = useAuth() as AuthContextProps;
+  const navigate = useNavigate();
+
+  const name = user?.name;
   const [data, setData] = useState<any>([]);
   const [isLoading, setIsLoading] = useState<boolean>(false);
   const [currentPage, setCurrentPage] = useState<number>(1);
@@ -111,6 +132,7 @@ export function App() {
       await api.delete(`/${id}`);
       setIsLoading(false);
       setSearch('');
+      setCurrentPage(1);
       handleGetTasks();
     } catch (error: any) {
       if (error.response) {
@@ -122,10 +144,32 @@ export function App() {
     }
   }
 
+  function handleSignOut() {
+    navigate('/');
+
+    if (signOut){
+      signOut();
+    }
+  }
+
 
   return (
     <div className='p-6 mx-auto space-y-4 flex flex-col items-center bg-slate-100 w-full h-screen'>
       <h1 className='text-2xl md:text-3xl font-bold'>Task Management</h1>
+      <div className='absolute right-6 top-0'>
+        <DropdownMenu>
+          <DropdownMenuTrigger asChild>
+            <Button variant="outline">Menu</Button>
+          </DropdownMenuTrigger>
+          <DropdownMenuContent className="w-56">
+            <DropdownMenuLabel>Olá {name}!</DropdownMenuLabel>
+            <DropdownMenuSeparator />
+            <DropdownMenuItem onClick={handleSignOut}>
+              Log out
+            </DropdownMenuItem>
+          </DropdownMenuContent>
+        </DropdownMenu>
+      </div>
 
       <div className='flex items-center justify-between w-[350px]'>
         <form className='flex items-center gap-2 w-full'>
