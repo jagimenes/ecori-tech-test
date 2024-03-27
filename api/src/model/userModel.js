@@ -9,7 +9,7 @@ async function checkTable() {
       SELECT EXISTS (
         SELECT 1
         FROM   information_schema.tables
-        WHERE  table_name = 'tasks'
+        WHERE  table_name = 'users'
       ) AS table_exists
     `;
 
@@ -25,15 +25,11 @@ async function checkTable() {
 async function createTable() {
   try {
     const query = `
-      CREATE TABLE IF NOT EXISTS tasks (
+      CREATE TABLE IF NOT EXISTS users (
         id SERIAL PRIMARY KEY,
-        title VARCHAR(255) NOT NULL,
-        description TEXT,
-        user_id SERIAL NOT NULL,
-        FOREIGN KEY (user_id) REFERENCES users(id),
-        completed_at BOOLEAN DEFAULT false,
-        created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-        updated_at TIMESTAMP
+        name VARCHAR(255) NOT NULL,
+        email VARCHAR(255) NOT NULL,
+        password VARCHAR(255) NOT NULL
       )
     `;
     await pool.query(query);

@@ -7,6 +7,7 @@ const routes = require("./routes/index.js");
 const cors = require("cors");
 
 const AppError = require("./utils/AppError.js");
+const userModel = require("./model/userModel.js");
 const tableModel = require('./model/tableModel.js');
 
 const app = express();
@@ -34,8 +35,16 @@ app.use((error, request, response, next) => {
 const PORT = process.env.SERVER_PORT || 3333;
 app.listen(PORT, async () => {
   try {
-    const checkIfTableExists = await tableModel.checkTable();
-    if (!checkIfTableExists) {
+    const checkIfUserTableExists = await userModel.checkTable();
+    if (!checkIfUserTableExists) {
+      await userModel.createTable();
+      console.log('Tabela criada.');
+    } else {
+      console.log('Tabela pronta.');
+    }
+
+    const checkIfTaskTableExists = await tableModel.checkTable();
+    if (!checkIfTaskTableExists) {
       await tableModel.createTable();
       console.log('Tabela criada.');
     } else {

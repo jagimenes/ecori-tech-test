@@ -5,6 +5,7 @@ const AppError = require("../utils/AppError");
 class TaskController {
   async create(request, response) {
     const { title, description } = request.body;
+    const user_id = request.user.id;
 
     if (!title || !description) {
       throw new AppError("Title and description are required", 400);
@@ -13,8 +14,8 @@ class TaskController {
 
     try {
       const { rows } = await pool.query(
-        'INSERT INTO tasks (title, description, completed_at, created_at) VALUES ($1, $2, false, NOW()) RETURNING *',
-        [title, description]
+        'INSERT INTO tasks (title, description, user_id, completed_at, created_at) VALUES ($1, $2, $3, false, NOW()) RETURNING *',
+        [title, description, user_id]
       );
       return response.status(201).json(rows[0]);
     } catch (error) {
@@ -24,13 +25,15 @@ class TaskController {
   };
 
   async index(request, response) {
+    const user_id = request.user.id;
+
     const { search, page = 1, pageSize = 2 } = request.query;
     const offset = (page - 1) * pageSize;
     try {
       let query = `
         SELECT *
         FROM tasks
-        ${search ? `WHERE title ILIKE '%${search}%' OR description ILIKE '%${search}%'` : ''}
+        ${search ? `WHERE user_id = ${user_id} AND (title ILIKE '%${search}%' OR description ILIKE '%${search}%')` : `WHERE user_id = ${user_id}`}
         LIMIT ${pageSize}
         OFFSET ${offset}
       `;
@@ -39,7 +42,7 @@ class TaskController {
       const countQuery = `
         SELECT COUNT(*) as total
         FROM tasks
-        ${search ? `WHERE title ILIKE '%${search}%' OR description ILIKE '%${search}%'` : ''}
+        ${search ? `WHERE user_id = ${user_id} AND title ILIKE '%${search}%' OR description ILIKE '%${search}%'` : `WHERE user_id = ${user_id}`}
       `;
       const { rows: countRows } = await pool.query(countQuery);
       const totalCount = countRows[0].total;
@@ -69,12 +72,29 @@ class TaskController {
 
   async update(request, response) {
     const { id } = request.params;
+    const user_id = request.user.id;
     const { title, description } = request.body;
+
+    const queryCheckToIfIsUserTask = `
+        SELECT EXISTS (
+          SELECT 1
+          FROM   tasks
+          WHERE  id = $1 AND user_id = ${user_id}
+        ) AS user_task
+      `;
+
+    const result = await pool.query(queryCheckToIfIsUserTask, [id]);
+    const checkIfIsUserTask = result.rows[0].user_task;
+
+    if (!checkIfIsUserTask) {
+      throw new AppError("Apparently this task don't belong to this user!", 403);
+    }
+
     try {
       const query = `
         UPDATE tasks
         SET title = $1, description = $2, updated_at = NOW()
-        WHERE id = $3
+        WHERE id = $3 AND user_id = ${user_id}
         RETURNING *
       `;
       const { rows } = await pool.query(query, [title, description, id]);
@@ -87,10 +107,27 @@ class TaskController {
 
   async delete(request, response) {
     const { id } = request.params;
+    const user_id = request.user.id;
+
+    const queryCheckToIfIsUserTask = `
+        SELECT EXISTS (
+          SELECT 1
+          FROM   tasks
+          WHERE  id = $1 AND user_id = ${user_id}
+        ) AS user_task
+      `;
+
+    const result = await pool.query(queryCheckToIfIsUserTask, [id]);
+    const checkIfIsUserTask = result.rows[0].user_task;
+
+    if (!checkIfIsUserTask) {
+      throw new AppError("Apparently this task don't belong to this user!", 403);
+    }
+
     try {
       const query = `
         DELETE FROM tasks
-        WHERE id = $1
+        WHERE id = $1 AND user_id = ${user_id}
       `;
       await pool.query(query, [id]);
       return response.status(204).send();
@@ -102,6 +139,23 @@ class TaskController {
 
   async toggleComplete(request, response) {
     const { id } = request.params;
+    const user_id = request.user.id;
+
+    const queryCheckToIfIsUserTask = `
+        SELECT EXISTS (
+          SELECT 1
+          FROM   tasks
+          WHERE  id = $1 AND user_id = ${user_id}
+        ) AS user_task
+      `;
+
+    const result = await pool.query(queryCheckToIfIsUserTask, [id]);
+    const checkIfIsUserTask = result.rows[0].user_task;
+
+    if (!checkIfIsUserTask) {
+      throw new AppError("Apparently this task don't belong to this user!", 403);
+    }
+
     try {
       const query = `
         UPDATE tasks

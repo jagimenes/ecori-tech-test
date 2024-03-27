@@ -1,9 +1,12 @@
 const { Router } = require("express");
 
 const TaskController = require("../controllers/TasksController");
+const ensureAuthenticated = require("../middleware/ensureAuthenticated");
 
 const taskRoutes = Router();
 const taskController = new TaskController();
+
+taskRoutes.use(ensureAuthenticated);
 
 taskRoutes.post('/', taskController.create);
 taskRoutes.get('/:id', taskController.show);
