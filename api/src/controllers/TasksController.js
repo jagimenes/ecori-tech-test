@@ -42,7 +42,7 @@ class TaskController {
       const countQuery = `
         SELECT COUNT(*) as total
         FROM tasks
-        ${search ? `WHERE user_id = ${user_id} AND title ILIKE '%${search}%' OR description ILIKE '%${search}%'` : `WHERE user_id = ${user_id}`}
+        ${search ? `WHERE user_id = ${user_id} AND (title ILIKE '%${search}%' OR description ILIKE '%${search}%')` : `WHERE user_id = ${user_id}`}
       `;
       const { rows: countRows } = await pool.query(countQuery);
       const totalCount = countRows[0].total;
