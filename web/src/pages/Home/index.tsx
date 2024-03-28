@@ -157,6 +157,21 @@ export function Home() {
     setIsLoading(true);
     const formData = new FormData();
     formData.append('file', files!);
+
+    try {
+      await api.post('/upload', formData);
+      setIsLoading(false);
+      setSearch('');
+      setFile(null);
+      handleGetTasks();
+    } catch (error: any) {
+      if (error.response) {
+        alert(error.response.data.error);
+      } else {
+        alert('Erro inesperado ao criar tarefa, por favor tente novamente mais tarde!');
+      }
+      setIsLoading(false);
+    }
   }
 
   function handleSignOut() {
