@@ -7,6 +7,10 @@
 
 > Projeto desenvolvido como teste técnico para vaga no time de desenvolvimento da Ecori Energia Solar.
 
+<a href='https://ecori-tech-test.vercel.app/'>Live</a> 🔗!
+
+Deploy do front-end hospedado na Vercel e do back-end no render.
+
 ## 💻 Pré-requisitos
 
 Antes de começar, verifique se você atendeu aos seguintes requisitos:
