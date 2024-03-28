@@ -1,6 +1,10 @@
 const pool = require("../../database");
 
+const TaskService = require("../services/TaskService");
+
 const AppError = require("../utils/AppError");
+
+const taskService = new TaskService();
 
 class TaskController {
   async create(request, response) {
@@ -170,6 +174,19 @@ class TaskController {
       return response.status().json();
     }
   };
+
+  async upload(request, response) {
+    const user_id = request.user.id;
+    const filePath = request.file.path;
+
+    try {
+      await taskService.taskUpload(filePath, user_id);
+      return response.status(201).json();
+    } catch (error) {
+      throw new AppError("Internal server error", 500);
+      return response.status().json();
+    }
+  }
 };
 
 

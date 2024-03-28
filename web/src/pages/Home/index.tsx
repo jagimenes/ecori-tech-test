@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { ChangeEvent, useEffect, useState } from 'react';
 import { Search, PlusCircle } from 'lucide-react';
 import { useNavigate } from 'react-router-dom';
 
@@ -42,6 +42,7 @@ export function Home() {
   const [search, setSearch] = useState<string>('');
   const [newTaskTitle, setNewTaskTitle] = useState<string>('');
   const [newTaskDescription, setNewTaskDescription] = useState<string>('');
+  const [files, setFile] = useState<File | null>(null);
 
   async function handleGetTasks() {
     setIsLoading(true);
@@ -144,6 +145,20 @@ export function Home() {
     }
   }
 
+  function handleFileChange(e: ChangeEvent<HTMLInputElement>) {
+    const file = e.target.files?.[0];
+
+    if (file){
+      setFile(file)
+    }
+  }
+
+  async function handleCSVUpload() {
+    setIsLoading(true);
+    const formData = new FormData();
+    formData.append('file', files!);
+  }
+
   function handleSignOut() {
     navigate('/');
 
@@ -181,59 +196,74 @@ export function Home() {
         </form>
       </div>
 
-      <Dialog>
-        <DialogTrigger asChild>
-          <Button>
+      <div className='flex flex-col md:flex-row w-[350px] md:w-auto items-end gap-6'>
+        <div className="grid w-full max-w-sm items-center gap-1.5">
+          <Label htmlFor="csv">CSV</Label>
+          <Input id="csv" type="file" onChange={handleFileChange} accept='.csv'/>
+        </div>
+        {
+          files
+          ?
+          <Button onClick={handleCSVUpload}>
             <PlusCircle className="w-4 h-4 mr-2" />
             Adicionar
           </Button>
-        </DialogTrigger>
+          :
+          <Dialog>
+            <DialogTrigger asChild>
+              <Button>
+                <PlusCircle className="w-4 h-4 mr-2" />
+                Adicionar
+              </Button>
+            </DialogTrigger>
 
-        <DialogContent className="sm:max-w-[425px]">
-          <DialogHeader>
-            <DialogTitle>Adicionar Tarefa</DialogTitle>
-            <DialogDescription>
-              Adicione um título e uma descrição da tarefa.
-            </DialogDescription>
-          </DialogHeader>
+            <DialogContent className="sm:max-w-[425px]">
+              <DialogHeader>
+                <DialogTitle>Adicionar Tarefa</DialogTitle>
+                <DialogDescription>
+                  Adicione um título e uma descrição da tarefa.
+                </DialogDescription>
+              </DialogHeader>
 
-          <form className="grid gap-4 py-4">
-            <div className="grid grid-cols-4 items-center gap-4">
-              <Label htmlFor="title" className="text-right">
-                Título
-              </Label>
-              <Input 
-                id="title" 
-                placeholder="Título da tarefa" 
-                className="col-span-3" 
-                value={newTaskTitle} 
-                onChange={e => setNewTaskTitle(e.target.value)}
-              />
-            </div>
-            <div className="grid grid-cols-4 items-center gap-4">
-              <Label htmlFor="description" className="text-right">
-                Descrição
-              </Label>
-              <Input 
-                id="description" 
-                placeholder="Descrição da tarefa" 
-                className="col-span-3"
-                value={newTaskDescription}
-                onChange={e => setNewTaskDescription(e.target.value)}
-              />
-            </div>
-            <DialogFooter>
-              <DialogClose asChild>
-                <Button type="button" variant="outline">Cancelar</Button>
-              </DialogClose>
-              <DialogClose asChild>
-                <Button type="submit" onClick={handleCreateTask}>Salvar</Button>
-              </DialogClose>
-            </DialogFooter>
-          </form>
+              <form className="grid gap-4 py-4">
+                <div className="grid grid-cols-4 items-center gap-4">
+                  <Label htmlFor="title" className="text-right">
+                    Título
+                  </Label>
+                  <Input 
+                    id="title" 
+                    placeholder="Título da tarefa" 
+                    className="col-span-3" 
+                    value={newTaskTitle} 
+                    onChange={e => setNewTaskTitle(e.target.value)}
+                  />
+                </div>
+                <div className="grid grid-cols-4 items-center gap-4">
+                  <Label htmlFor="description" className="text-right">
+                    Descrição
+                  </Label>
+                  <Input 
+                    id="description" 
+                    placeholder="Descrição da tarefa" 
+                    className="col-span-3"
+                    value={newTaskDescription}
+                    onChange={e => setNewTaskDescription(e.target.value)}
+                  />
+                </div>
+                <DialogFooter>
+                  <DialogClose asChild>
+                    <Button type="button" variant="outline">Cancelar</Button>
+                  </DialogClose>
+                  <DialogClose asChild>
+                    <Button type="submit" onClick={handleCreateTask}>Salvar</Button>
+                  </DialogClose>
+                </DialogFooter>
+              </form>
 
-        </DialogContent>
-      </Dialog>
+            </DialogContent>
+          </Dialog>
+        }
+      </div>
 
       <div className='flex flex-col md:flex-row md:pt-20 items-center gap-4'>
         {
