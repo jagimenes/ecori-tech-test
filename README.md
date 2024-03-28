@@ -1,35 +1,80 @@
-[![pt-br](https://img.shields.io/badge/lang-pt--br-green.svg)](https://github.com/jagimenes/ecori-tech-test/blob/main/README.pt-br.md)
+# Ecori Tech Test
 
-## Tech test to integrate the Ecori Team ☀
+![GitHub repo size](https://img.shields.io/github/repo-size/SergioRSanchez/ecori-tech-test?style=for-the-badge)
+![GitHub language count](https://img.shields.io/github/languages/count/SergioRSanchez/ecori-tech-test?style=for-the-badge)
+![Bitbucket open issues](https://img.shields.io/bitbucket/issues/SergioRSanchez/ecori-tech-test?style=for-the-badge)
 
-<br>
 
-## Create a Rest API and a task management SPA. <br>
+> Projeto desenvolvido como teste técnico para vaga no time de desenvolvimento da Ecori Energia Solar.
 
-## :computer: Functionalities (Back-end)
-🔴 A route of **tasks listing**, receiving parameters like filters (_title_ ou _description_) and pagination (_page_ e _pageSize_);<br>
-🔴 A route of **task creation**, receiving fields, _title_, _description_. The complete object, on database, should have more 3 fields: _completed_at_ (to control when the task is done), _created_at_ (to control when the task was created) and _updated_at_ (to control when the task was updated);<br>
-🔴 A route of **task update**, receiving by route params the task _id_, and receiving fields like _title_, _description_;<br>
-🔴 A route of **task removal**, receiving by route params the task _id_;<br>
-🔴 A route of **mark task as done**, receiving by route params the task _id_;<br>
-**Other suggestions**<br>
-🟢 **Bonus 1**: Importing tasks, with a list of _title_ and _description_, from a CSV file;<br>
-🟢 **Bonus 2**: Auth control with login;<br>
+<a href='https://ecori-tech-test.vercel.app/'>Live</a> 🔗!
 
-## :computer: Functionalities (Front-end)
-🔴Implement all backend functionalities <br>
+Deploy do front-end hospedado na Vercel e do back-end no render.
 
-## Technologies and tools you have to use:
-☑️ [Javascript](https://developer.mozilla.org/en-US/docs/Web/JavaScript) <br>
-☑️ [Node.js](https://nodejs.org/) <br>
-☑️ [React](https://react.dev/) <br>
-☑️ [PostgreSQL](https://www.postgresql.org/) <br>
-❗ It would be awesome, if you could provide us with an application with **tests** <br>
-❗ It would be awesome, if you implemented some treatment for concurrency in the data update routes <br>
+## 💻 Pré-requisitos
 
-## Start instructions
-- Create a fork of this project
-- Do all the tasks to complete the application
-- Create a README.md showing the steps to run the application
-- Make a merge request on the main branch
-- Send us the link of the merge request
+Antes de começar, verifique se você atendeu aos seguintes requisitos:
+
+- Você instalou a versão mais recente do `<nodejs>` que pode ser encontrada <a href='https://nodejs.org/en'>aqui</a>.
+- Você tem uma máquina `<Windows / Linux / Mac>`.
+- Crie o arquivo `.env` de acordo com o `.env.example` da api e do client.
+
+## 👨‍💻 Instalando o Projeto
+
+Para instalar as dependências do projeto, siga estas etapas:
+
+Clone o repositório: 
+```
+git clone https://github.com/SergioRSanchez/ecori-tech-test.git
+```
+
+## 🤖 Instalando a API
+
+Entre no diretório da api:
+
+```
+cd api
+```
+
+Execute o comando no terminal:
+
+```
+npm install
+```
+
+Para executar a API execute o comando:
+
+```
+npm run dev
+```
+
+## 🚀 Instalando o Client
+
+Entre no diretório do client:
+
+```
+cd web
+```
+
+Execute o comando no terminal:
+
+```
+npm install
+```
+
+Para executar o client execute o comando:
+
+```
+npm run dev
+```
+
+
+## ☕ Usando o projeto
+
+Para usar o projeto basta criar um usuário com nome, email e senha e logar na aplicação. Adicione tarefas através da interface ou adicione um arquivo csv contendo o título e a descrição das tarefas separadas por ponto e vírgula.
+
+
+
+## 🤝 Contato
+<a href='mailto:ssanchezfilho@gmail.com'>![image](https://img.shields.io/badge/Gmail-D14836?style=for-the-badge&logo=gmail&logoColor=white)</a>
+<a href='https://www.linkedin.com/in/sergio-roberto-sanchez-filho/' target='_blank'>![image](https://img.shields.io/badge/LinkedIn-0077B5?style=for-the-badge&logo=linkedin&logoColor=white)</a>
